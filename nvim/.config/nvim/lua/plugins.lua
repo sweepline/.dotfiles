@@ -29,8 +29,6 @@ return require('packer').startup(function()
 
     use {'nvim-lua/completion-nvim'}
 
-    use {'tpope/vim-dispatch'}
-
-	-- use {'tpope/vim-fugitive'}
+	use {'tpope/vim-fugitive'}
 
 end)

@@ -12,6 +12,6 @@ utils.map('n', '<C-n>', '<cmd>NvimTreeToggle<CR>')
 utils.map('n', '<Leader>r', '<cmd>NvimTreeRefresh<CR>')
 utils.map('n', '<Leader>n', '<cmd>NvimTreeFindFile<CR>')
 
--- <Tab> to navigate the completion menu
+-- <Tab> to navigate the completion menu, just use C-p and C-n
 --utils.map('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<Tab>"', {expr = true})
 --utils.map('i', '<Tab>', 'pumvisible() ? "\\<C-n>" : "\\<Tab>"', {expr = true})

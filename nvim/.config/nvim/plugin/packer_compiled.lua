@@ -122,10 +122,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/mikkel/.local/share/nvim/site/pack/packer/start/telescope.nvim"
   },
-  ["vim-dispatch"] = {
-    loaded = true,
-    path = "/home/mikkel/.local/share/nvim/site/pack/packer/start/vim-dispatch"
-  },
   ["vim-fugitive"] = {
     loaded = true,
     path = "/home/mikkel/.local/share/nvim/site/pack/packer/start/vim-fugitive"
