@@ -162,7 +162,8 @@ local languages = {
     html = {prettier},
     -- css = {prettier},
     -- scss = {prettier},
-    markdown = {prettier}
+    markdown = {prettier},
+    python = {autopep8}
 }
 
 nvim_lsp.efm.setup {
