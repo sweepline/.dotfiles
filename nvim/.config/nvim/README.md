@@ -14,3 +14,6 @@ You must install the LSP servers you need. More info on that in `nvim-lspconfig`
 In `lsp.lua`, there is also the EFM languageserver which is what runs linters and formatter, these dependencies also needs to be installed.
 
 Alternatively you could use the github package `kabouzeid/nvim-lspinstall`.
+
+## Telescope
+[Telescope](https://github.com/nvim-telescope/telescope.nvim) has a couple of dependencies and many config options.
