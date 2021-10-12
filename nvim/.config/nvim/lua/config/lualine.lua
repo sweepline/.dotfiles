@@ -1,7 +1,7 @@
 local lualine = require('lualine')
 lualine.setup {
     options = {
-        theme = custom_gruvbox,
+        theme = gruvbox_material,
         -- section_separators = {'', ''},
         -- component_separators = {'', ''},
         section_separators = '',

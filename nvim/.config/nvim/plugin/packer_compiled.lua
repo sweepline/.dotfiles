@@ -125,6 +125,10 @@ _G.packer_plugins = {
   ["vim-fugitive"] = {
     loaded = true,
     path = "/home/mikkel/.local/share/nvim/site/pack/packer/start/vim-fugitive"
+  },
+  ["vim-visual-multi"] = {
+    loaded = true,
+    path = "/home/mikkel/.local/share/nvim/site/pack/packer/start/vim-visual-multi"
   }
 }
 

@@ -14,7 +14,7 @@ utils.map('n', '<Leader>fh', '<cmd>Telescope help_tags<CR>')
 
 utils.map('n', '<Leader>gs', '<cmd>Git<CR>') -- Git status
 
-utils.map('n', '<C-n>', '<cmd>NvimTreeToggle<CR>')
+utils.map('n', '<C-t>', '<cmd>NvimTreeToggle<CR>')
 utils.map('n', '<Leader>r', '<cmd>NvimTreeRefresh<CR>')
 utils.map('n', '<Leader>n', '<cmd>NvimTreeFindFile<CR>')
 

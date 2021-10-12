@@ -22,9 +22,15 @@ utils.opt('o', 'cursorline', false)
 utils.opt('w', 'number', true)
 utils.opt('w', 'relativenumber', false)
 
+utils.opt('o', 'listchars', 'tab:▷ ,trail:·,extends:◣,precedes:◢,nbsp:○')
+
 -- Highlight yank
 cmd 'au TextYankPost * lua vim.highlight.on_yank {on_visual = false}'
 
-
 cmd 'au BufRead /home/mikkel/repos/mono/**.py setlocal sw=4 ts=4 sts=4 noet'
+
+-- Highlight trailing whitespace
+cmd 'autocmd ColorScheme * highlight ExtraWhitespace ctermbg=darkred guibg=darkred'
+cmd [[autocmd InsertLeave * syn match ExtraWhitespace /\s\+$\| \+\ze\t/]]
+cmd [[autocmd InsertEnter * syn clear ExtraWhitespace]]
 

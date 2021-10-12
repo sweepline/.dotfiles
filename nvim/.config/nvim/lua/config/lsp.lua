@@ -113,6 +113,8 @@ nvim_lsp.rust_analyzer.setup {
     }
 }
 
+-- nvim_lsp.zeta_note.setup {cmd = {'zeta-note'}}
+
 nvim_lsp.stylelint_lsp.setup {
     on_attach = on_attach,
     settings = {stylelintplus = {autoFixOnFormat = true, cssInJs = true}},
@@ -130,12 +132,16 @@ nvim_lsp.tsserver.setup {
 
 }
 
+nvim_lsp.tailwindcss.setup {on_attach = on_attach}
+
 nvim_lsp.clangd.setup {on_attach = on_attach}
 
 nvim_lsp.gdscript.setup {on_attach = on_attach}
 
+-- EFM Setup for ESLint
+
 local prettier = {
-    formatCommand = "./node_modules/.bin/prettier --stdin-filepath ${INPUT}",
+    formatCommand = "prettier --stdin-filepath ${INPUT}",
     formatStdin = true
 }
 
