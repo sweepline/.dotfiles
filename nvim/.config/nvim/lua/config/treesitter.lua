@@ -1,4 +1,4 @@
-local utils = require('utils')
+local utils = require( 'utils')
 local configs = require('nvim-treesitter.configs')
 
 configs.setup {
@@ -12,10 +12,10 @@ configs.setup {
             scope_incremental = "<M-e>",
             node_decremental = "<M-C-w>"
         }
-    }
-    -- indent = {enable = true}
+    },
+    indent = {enable = true}
 }
 
-utils.opt('o', 'foldlevelstart', 20)
-utils.opt('o', 'foldmethod', 'expr')
-utils.opt('o', 'foldexpr', 'nvim_treesitter#foldexpr()')
+--utils.opt('o', 'foldlevelstart', 20)
+--utils.opt('o', 'foldmethod', 'expr')
+--utils.opt('o', 'foldexpr', 'nvim_treesitter#foldexpr()')

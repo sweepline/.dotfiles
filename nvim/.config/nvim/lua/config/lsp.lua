@@ -1,5 +1,4 @@
 local nvim_lsp = require('lspconfig')
-local saga = require('lspsaga')
 
 -- Icons
 vim.lsp.protocol.CompletionItemKind = {
@@ -30,11 +29,26 @@ vim.lsp.protocol.CompletionItemKind = {
     '' -- TypeParameter
 }
 
+-- Add additional capabilities supported by nvim-cmp
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
+-- Mappings
+local opts = {noremap = true, silent = true}
+
+vim.api.nvim_set_keymap('n', '<space>e',
+                        '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>',
+                        opts)
+vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>',
+                        opts)
+vim.api.nvim_set_keymap('n', '<space>q',
+                        '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>f',
+                        '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+
 -- Your custom attach function for nvim-lspconfig goes here.
 local on_attach = function(client, bufnr)
-    -- Enable nvimlua/completion-nvim
-    require('completion').on_attach(client, bufnr)
-
     local function buf_set_keymap(...)
         vim.api.nvim_buf_set_keymap(bufnr, ...)
     end
@@ -45,61 +59,54 @@ local on_attach = function(client, bufnr)
     -- Enable completion triggered by <c-x><c-o>
     buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-    -- Mappings
-    local opts = {noremap = true, silent = true}
-
+    -- Mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
-    buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-    buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-    buf_set_keymap('n', 'gh',
-                   '<cmd>lua require("lspsaga.provider").preview_definition()<CR>',
-                   opts)
-    buf_set_keymap('n', 'K',
-                   '<cmd>lua require("lspsaga.hover").render_hover_doc()<CR>',
-                   opts)
-    buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-    buf_set_keymap('n', '<C-k>',
-                   '<cmd>lua require("lspsaga.signaturehelp").signature_help()<CR>',
-                   opts)
-    buf_set_keymap('n', '<leader>D',
-                   '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-    buf_set_keymap('n', '<leader>rn',
-                   '<cmd>lua require("lspsaga.rename").rename()<CR>', opts)
-    buf_set_keymap('n', '<leader>ca',
-                   '<cmd>lua require("lspsaga.codeaction").code_action()<CR>',
-                   opts)
-    buf_set_keymap('v', '<leader>ca',
-                   ':<C-U>lua require("lspsaga.codeaction").range_code_action()<CR>',
-                   opts)
-    buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-    buf_set_keymap('n', '<leader>e',
-                   '<cmd>lua require("lspsaga.diagnostic").show_line_diagnostics()<CR>',
-                   opts)
-    buf_set_keymap('n', '[d',
-                   '<cmd>lua require("lspsaga.diagnostic").lsp_jump_diagnostic_prev()<CR>',
-                   opts)
-    buf_set_keymap('n', ']d',
-                   '<cmd>lua require("lspsaga.diagnostic").lsp_jump_diagnostic_next()<CR>',
-                   opts)
-    buf_set_keymap('n', '<C-f>', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD',
+                                '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd',
+                                '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K',
+                                '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi',
+                                '<cmd>lua vim.lsp.buf.implementation()<CR>',
+                                opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>',
+                                '<cmd>lua vim.lsp.buf.signature_help()<CR>',
+                                opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wa',
+                                '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>',
+                                opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wr',
+                                '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>',
+                                opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wl',
+                                '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>',
+                                opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>D',
+                                '<cmd>lua vim.lsp.buf.type_definition()<CR>',
+                                opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>rn',
+                                '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca',
+                                '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr',
+                                '<cmd>lua vim.lsp.buf.references()<CR>', opts)
 
 end
 
-saga.init_lsp_saga({
-    code_action_prompt = {enable = false},
-    max_preview_lines = 20
-})
-
--- Enable (broadcasting) snippet capability for completion
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-
 nvim_lsp.html.setup {on_attach = on_attach, capabilities = capabilities}
 
-nvim_lsp.pyright.setup {on_attach = on_attach}
+nvim_lsp.sumneko_lua.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {Lua = {diagnostics = {globals = {'vim'}}}}
+}
+
+nvim_lsp.pyright.setup {on_attach = on_attach, capabilities = capabilities}
 
 nvim_lsp.rust_analyzer.setup {
     on_attach = on_attach,
+    capabilities = capabilities,
     settings = {
         ['rust-analyzer'] = {
             checkOnSave = {
@@ -113,15 +120,15 @@ nvim_lsp.rust_analyzer.setup {
     }
 }
 
--- nvim_lsp.zeta_note.setup {cmd = {'zeta-note'}}
-
 nvim_lsp.stylelint_lsp.setup {
     on_attach = on_attach,
+    capabilities = capabilities,
     settings = {stylelintplus = {autoFixOnFormat = true, cssInJs = true}},
     filetypes = {'css', 'less', 'scss'}
 }
 
 nvim_lsp.tsserver.setup {
+    capabilities = capabilities,
     on_attach = function(client, bufnr)
         if client.config.flags then
             client.config.flags.allow_incremental_sync = true
@@ -132,11 +139,11 @@ nvim_lsp.tsserver.setup {
 
 }
 
-nvim_lsp.tailwindcss.setup {on_attach = on_attach}
+nvim_lsp.tailwindcss.setup {on_attach = on_attach, capabilities = capabilities}
 
-nvim_lsp.clangd.setup {on_attach = on_attach}
+nvim_lsp.clangd.setup {on_attach = on_attach, capabilities = capabilities}
 
-nvim_lsp.gdscript.setup {on_attach = on_attach}
+nvim_lsp.gdscript.setup {on_attach = on_attach, capabilities = capabilities}
 
 -- EFM Setup for ESLint
 
@@ -173,6 +180,7 @@ local languages = {
 }
 
 nvim_lsp.efm.setup {
+    capabilities = capabilities,
     on_attach = on_attach,
     init_options = {documentFormatting = true, codeAction = true},
     filetypes = vim.tbl_keys(languages),
