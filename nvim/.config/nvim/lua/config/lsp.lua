@@ -43,7 +43,7 @@ vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>',
 vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>',
                         opts)
 vim.api.nvim_set_keymap('n', '<space>q',
-                        '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+                        '<cmd>Telescope diagnostics bufnr=0<CR>', opts)
 vim.api.nvim_set_keymap('n', '<space>f',
                         '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
@@ -61,18 +61,33 @@ local on_attach = function(client, bufnr)
 
     -- Mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD',
-                                '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd',
-                                '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K',
-                                '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+                                '<cmd>Telescope lsp_definitions<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi',
-                                '<cmd>lua vim.lsp.buf.implementation()<CR>',
-                                opts)
+                                '<cmd>Telescope lsp_implementations<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gt',
+                                '<cmd>Telescope lsp_type_definitions<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr',
+                                '<cmd>Telescope lsp_references<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gs',
+                                '<cmd>Telescope lsp_document_symbols<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gS',
+                                '<cmd>Telescope lsp_workspace_symbols<CR>', opts)
+
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>',
                                 '<cmd>lua vim.lsp.buf.signature_help()<CR>',
                                 opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K',
+                                '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>rn',
+                                '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca',
+                                '<cmd>Telescope lsp_code_actions<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>cr',
+                                '<cmd>Telescope lsp_range_code_actions<CR>',
+                                opts)
+
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wa',
                                 '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>',
                                 opts)
@@ -82,15 +97,6 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wl',
                                 '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>',
                                 opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>D',
-                                '<cmd>lua vim.lsp.buf.type_definition()<CR>',
-                                opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>rn',
-                                '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca',
-                                '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr',
-                                '<cmd>lua vim.lsp.buf.references()<CR>', opts)
 
 end
 
@@ -161,7 +167,8 @@ local eslint = {
     formatStdin = true
 }
 
-local autopep8 = {formatCommand = "autopep8 -", formatStdin = true}
+-- local autopep8 = {formatCommand = "autopep8 -", formatStdin = true}
+local black = {formatCommand = "black -", formatStdin = true}
 
 local luaformat = {formatCommand = 'lua-format -i', formatStdin = true}
 
@@ -176,7 +183,7 @@ local languages = {
     -- css = {prettier},
     -- scss = {prettier},
     markdown = {prettier},
-    python = {autopep8}
+    python = {black}
 }
 
 nvim_lsp.efm.setup {
