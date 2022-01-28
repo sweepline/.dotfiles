@@ -9,7 +9,7 @@ Should do `:PackerSync` and `:PackerInstall`.
 `:TSUpdate all`
 
 ## LSP
-You must install the LSP servers you need. More info on that in `nvim-lspconfig` [CONFIG.md](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md).
+You must install the LSP servers you need. More info on that in `nvim-lspconfig` [server_configurations.md](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md).
 
 In `lsp.lua`, there is also the EFM languageserver which is what runs linters and formatter, these dependencies also needs to be installed.
 
