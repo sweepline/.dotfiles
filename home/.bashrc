@@ -18,6 +18,7 @@ export PATH="$HOME/.emacs.d/bin:$PATH"
 alias vimf="nvim \$(fzf --height 40%)"
 alias localstack="$HOME/repos/mono/scripts/localstack.py"
 export SCCACHE_REDIS=redis://esa
+alias pyscadmin="ssh -t ws5 pyscadmin"
 
 alias mvi="mv -iv"
 alias cpi="cp -riv"

@@ -11,7 +11,7 @@ cmp.setup({
         expand = function(args)
             vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
         end
-    },
+		},
     mapping = {
         ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), {'i', 'c'}),
         ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), {'i', 'c'}),
@@ -23,9 +23,8 @@ cmp.setup({
         }),
         ['<CR>'] = cmp.mapping.confirm({select = true}) -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     },
-    sources = cmp.config.sources({
-        {name = 'nvim_lsp'}, {name = 'vsnip'} -- For vsnip users.
-    }, {{name = 'buffer'}})
+    sources = cmp.config.sources({{name = 'nvim_lsp'}, {name = 'vsnip'}},
+                                 {{name = 'buffer'}})
 })
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
