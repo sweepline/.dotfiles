@@ -14,7 +14,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term alacritty
+set $term gnome-terminal
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -222,7 +222,7 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym $mod+Shift+S exec grim -g "$(slurp)" - | wl-copy
 
 # Colors
-set $bg 	#d65d0e
+set $bg			   #d65d0e
 set $bg-inactive   #323232
 set $bg-urgent     #000000
 set $text          #eeeeec
