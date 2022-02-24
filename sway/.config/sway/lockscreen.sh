@@ -1,0 +1,28 @@
+swaylock \
+	--screenshots \
+	--clock \
+	--indicator \
+	--indicator-radius 200 \
+	--indicator-thickness 7 \
+	--effect-blur 8x8 \
+	--text-color ebdbb2 \
+	--text-clear-color ebdbb2 \
+	--text-ver-color ebdbb2 \
+	--text-wrong-color ebdbb2 \
+	--key-hl-color 83a598 \
+	--ring-color 458588 \
+	--ring-clear-color d79921 \
+	--ring-ver-color 689d6a \
+	--ring-wrong-color cc241d \
+	--line-color 00000000 \
+	--line-clear-color 00000000 \
+	--line-ver-color 00000000 \
+	--line-wrong-color 00000000 \
+	--inside-color 00000088 \
+	--inside-clear-color 00000088 \
+	--inside-ver-color 00000088 \
+	--inside-wrong-color 00000088 \
+	--separator-color 00000000 \
+	--grace 2 \
+	--grace-no-mouse \
+	--fade-in 0.2
