@@ -145,8 +145,6 @@ nvim_lsp.tsserver.setup {
 
 }
 
-nvim_lsp.tailwindcss.setup {on_attach = on_attach, capabilities = capabilities}
-
 nvim_lsp.clangd.setup {on_attach = on_attach, capabilities = capabilities}
 
 nvim_lsp.gdscript.setup {on_attach = on_attach, capabilities = capabilities}
@@ -163,8 +161,10 @@ local eslint = {
     lintIgnoreExitCode = true,
     lintStdin = true,
     lintFormats = {"%f:%l:%c: %m"},
-    formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename ${INPUT}",
+    formatCommand = "prettier --stdin-filepath ${INPUT}",
     formatStdin = true
+    -- formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename ${INPUT}",
+    -- formatStdin = true
 }
 
 -- local autopep8 = {formatCommand = "autopep8 -", formatStdin = true}
