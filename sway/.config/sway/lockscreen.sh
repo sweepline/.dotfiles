@@ -23,6 +23,6 @@ swaylock \
 	--inside-ver-color 00000088 \
 	--inside-wrong-color 00000088 \
 	--separator-color 00000000 \
-	--grace 2 \
+	--grace 8 \
 	--grace-no-mouse \
 	--fade-in 0.2

@@ -100,7 +100,17 @@ local on_attach = function(client, bufnr)
 
 end
 
--- nvim_lsp.html.setup {on_attach = on_attach, capabilities = capabilities}
+nvim_lsp.html.setup {
+    cmd = {"vscode-html-languageserver", "--stdio"},
+    on_attach = on_attach,
+    capabilities = capabilities
+}
+
+nvim_lsp.cssls.setup {
+    cmd = {"vscode-css-languageserver", "--stdio"},
+    on_attach = on_attach,
+    capabilities = capabilities
+}
 
 nvim_lsp.sumneko_lua.setup {
     on_attach = on_attach,
@@ -126,13 +136,6 @@ nvim_lsp.rust_analyzer.setup {
     }
 }
 
-nvim_lsp.stylelint_lsp.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    settings = {stylelintplus = {autoFixOnFormat = true, cssInJs = true}},
-    filetypes = {'css', 'less', 'scss'}
-}
-
 nvim_lsp.tsserver.setup {
     capabilities = capabilities,
     on_attach = function(client, bufnr)
@@ -152,6 +155,17 @@ nvim_lsp.gdscript.setup {on_attach = on_attach, capabilities = capabilities}
 -- EFM Setup for ESLint
 
 local prettier = {
+    formatCommand = "prettier --stdin-filepath ${INPUT}",
+    formatStdin = true
+}
+
+local stylelint = {
+    lintCommand = "stylelint --stdin --stdin-filename ${INPUT} --formatter compact",
+    lintIgnoreExitCode = true,
+    lintStdin = true,
+    lintFormats = {
+        '%f: line %l, col %c, %tarning - %m', '%f: line %l, col %c, %trror - %m'
+    },
     formatCommand = "prettier --stdin-filepath ${INPUT}",
     formatStdin = true
 }
@@ -180,8 +194,8 @@ local languages = {
     javascriptreact = {eslint},
     json = {prettier},
     html = {prettier},
-    -- css = {prettier},
-    -- scss = {prettier},
+    css = {stylelint},
+    scss = {stylelint},
     markdown = {prettier},
     python = {black}
 }
