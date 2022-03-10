@@ -5,6 +5,7 @@ local utils = require('utils')
 utils.map('n', '<C-l>', '<cmd>noh<CR>') -- Clear Highlights
 utils.map('i', 'jk', '<Esc>') -- jk to escape
 utils.map('i', '<C-Space>', '<C-x><C-o>')
+utils.map('t', '<Esc>', '<C-\\><C-n>')
 
 utils.map('n', '<Leader>ff', '<cmd>Telescope find_files<CR>')
 utils.map('n', '<Leader>fr', '<cmd>Telescope resume<CR>')
@@ -18,3 +19,8 @@ utils.map('n', '<Leader>ii', '<cmd>Git<CR>') -- Git status
 utils.map('n', '<Leader>ic', '<cmd>Telescope git_bcommits<CR>')
 utils.map('n', '<Leader>ib', '<cmd>Telescope git_branches<CR>')
 utils.map('n', '<Leader>is', '<cmd>Telescope git_status<CR>')
+
+-- Split resizing
+utils.map('n', '<C-w>>', '20<C-w>>')
+utils.map('n', '<C-w><', '20<C-w><')
+

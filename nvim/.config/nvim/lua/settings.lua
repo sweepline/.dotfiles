@@ -34,3 +34,4 @@ cmd 'autocmd ColorScheme * highlight ExtraWhitespace ctermbg=darkred guibg=darkr
 cmd [[autocmd InsertLeave * syn match ExtraWhitespace /\s\+$\| \+\ze\t/]]
 cmd [[autocmd InsertEnter * syn clear ExtraWhitespace]]
 
+vim.g.tidal_target = "terminal"

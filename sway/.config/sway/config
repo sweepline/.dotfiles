@@ -47,7 +47,7 @@ output 'Dell Inc. DELL U2715H GH85D5AH00TL' resolution 2560x1440 position 2560,0
 # resumed. It will also lock your screen before your computer goes to sleep.
 
 set $lockscreen sh ~/.config/sway/lockscreen.sh
-set $lockscreen_lock_after  600
+set $lockscreen_lock_after  1800
 set $lockscreen_turnoff_after  30
 
 exec swayidle -w \
@@ -230,13 +230,13 @@ bindsym $mod+Shift+S exec grim -g "$(slurp)" - | wl-copy
 
 # Colors
 set $bg			   #d65d0e
-set $bg-inactive   #323232
-set $bg-urgent     #000000
-set $text          #eeeeec
-set $text-inactive #babdb6
+set $bg-inactive   #282828
+set $bg-urgent     #282828
+set $text          #ebdbb2
+set $text-inactive #ebdbb2
+set $urgent		   #cc241d
 
-set $bar           #323232
-set $statusline    #e0e0e0
+set $bar           #282828
 
 client.focused          $bg           $bg          $text          $bg $bg
 client.unfocused        $bg-inactive  $bg-inactive $text-inactive $bar $bar
@@ -255,9 +255,12 @@ bar {
     status_command while date +'%Y-%m-%d %H:%M:%S %p'; do sleep 1; done
 
     colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
+        background $bg-inactive
+        statusline $text
+		active_workspace #665c54 $bar $text
+		focused_workspace #665c54 #665c54 $text
+		urgent_workspace $urgent $bar $text
+		inactive_workspace $bg-inactive $bar $text
     }
 }
 

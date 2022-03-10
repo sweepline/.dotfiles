@@ -37,4 +37,6 @@ return require('packer').startup(function()
 
     use {'tpope/vim-fugitive'}
 
+    use {'tidalcycles/vim-tidal'}
+
 end)

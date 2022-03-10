@@ -175,10 +175,9 @@ local eslint = {
     lintIgnoreExitCode = true,
     lintStdin = true,
     lintFormats = {"%f:%l:%c: %m"},
-    formatCommand = "prettier --stdin-filepath ${INPUT}",
+    --formatCommand = "prettier --stdin-filepath ${INPUT}",
+    formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename ${INPUT}",
     formatStdin = true
-    -- formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename ${INPUT}",
-    -- formatStdin = true
 }
 
 -- local autopep8 = {formatCommand = "autopep8 -", formatStdin = true}
