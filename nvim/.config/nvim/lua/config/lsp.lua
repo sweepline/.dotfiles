@@ -44,8 +44,8 @@ vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>',
                         opts)
 vim.api.nvim_set_keymap('n', '<space>q',
                         '<cmd>Telescope diagnostics bufnr=0<CR>', opts)
-vim.api.nvim_set_keymap('n', '<space>f',
-                        '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space><Tab>', '<cmd>lua vim.lsp.buf.formatting()<CR>',
+                        opts)
 
 -- Your custom attach function for nvim-lspconfig goes here.
 local on_attach = function(client, bufnr)
@@ -112,6 +112,19 @@ nvim_lsp.cssls.setup {
     capabilities = capabilities
 }
 
+local eslint_on_attach = function(client, bufnr)
+    on_attach(client, bufnr)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space><Tab>',
+                                '<cmd>:execute "lua vim.lsp.buf.formatting()" | EslintFixAll <CR>',
+                                opts)
+end
+
+nvim_lsp.eslint.setup {
+    cmd = {"vscode-eslint-language-server", "--stdio"},
+    on_attach = eslint_on_attach,
+    capabilities = capabilities
+}
+
 nvim_lsp.sumneko_lua.setup {
     on_attach = on_attach,
     capabilities = capabilities,
@@ -175,7 +188,7 @@ local eslint = {
     lintIgnoreExitCode = true,
     lintStdin = true,
     lintFormats = {"%f:%l:%c: %m"},
-    --formatCommand = "prettier --stdin-filepath ${INPUT}",
+    -- formatCommand = "prettier --stdin-filepath ${INPUT}",
     formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename ${INPUT}",
     formatStdin = true
 }
@@ -187,10 +200,10 @@ local luaformat = {formatCommand = 'lua-format -i', formatStdin = true}
 
 local languages = {
     lua = {luaformat},
-    typescript = {eslint},
-    javascript = {eslint},
-    typescriptreact = {eslint},
-    javascriptreact = {eslint},
+    -- typescript = {eslint},
+    -- javascript = {eslint},
+    -- typescriptreact = {eslint},
+    -- javascriptreact = {eslint},
     json = {prettier},
     html = {prettier},
     css = {stylelint},
