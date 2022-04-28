@@ -29,9 +29,8 @@ vim.lsp.protocol.CompletionItemKind = {
     '' -- TypeParameter
 }
 
--- Add additional capabilities supported by nvim-cmp
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+-- Setup lspconfig.
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- Mappings
 local opts = {noremap = true, silent = true}
@@ -83,10 +82,9 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>rn',
                                 '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca',
-                                '<cmd>Telescope lsp_code_actions<CR>', opts)
+                                "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>cr',
-                                '<cmd>Telescope lsp_range_code_actions<CR>',
-                                opts)
+                                "<cmd>lua vim.lsp.buf.range_code_action()<CR>", opts)
 
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wa',
                                 '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>',
@@ -136,17 +134,17 @@ nvim_lsp.pyright.setup {on_attach = on_attach, capabilities = capabilities}
 nvim_lsp.rust_analyzer.setup {
     on_attach = on_attach,
     capabilities = capabilities,
-    settings = {
-        ['rust-analyzer'] = {
-            checkOnSave = {
-                allFeatures = true,
-                overrideCommand = {
-                    'cargo', 'clippy', '--workspace', '--message-format=json',
-                    '--all-targets', '--all-features'
-                }
-            }
-        }
-    }
+    -- settings = {
+    --     ['rust-analyzer'] = {
+    --         checkOnSave = {
+    --             allFeatures = true,
+    --             overrideCommand = {
+    --                 'cargo', 'clippy', '--workspace', '--message-format=json',
+    --                 '--all-targets', '--all-features'
+    --             }
+    --         }
+    --     }
+    -- }
 }
 
 nvim_lsp.tsserver.setup {

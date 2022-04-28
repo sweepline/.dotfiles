@@ -1,4 +1,5 @@
 swaylock \
+	-f \
 	--screenshots \
 	--clock \
 	--indicator \
