@@ -1,6 +1,5 @@
 local indent = 4
 
-vim.cmd("syntax enable")
 vim.cmd("filetype plugin indent on")
 vim.opt.expandtab = false
 vim.opt.shiftwidth = indent
