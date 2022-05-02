@@ -230,6 +230,7 @@ bindsym $mod+Shift+S exec grim -g "$(slurp)" - | wl-copy
 
 # Colors
 set $bg			   #d65d0e
+set $focus		   #7c6f64
 set $bg-inactive   #282828
 set $bg-urgent     #282828
 set $text          #ebdbb2
@@ -238,10 +239,10 @@ set $urgent		   #cc241d
 
 set $bar           #282828
 
-client.focused          $bg           $bg          $text          $bg $bg
-client.unfocused        $bg-inactive  $bg-inactive $text-inactive $bar $bar
-client.focused_inactive $bg-inactive  $bg-inactive $text-inactive $bar $bar
-client.urgent           $bg-urgent    $bg-urgent   $text          $bar $bar
+client.focused          $focus        $focus       $focus         $focus	$focus
+client.unfocused        $bg-inactive  $bg-inactive $text-inactive $bar		$bar
+client.focused_inactive $bg-inactive  $bg-inactive $text-inactive $bar		$bar
+client.urgent           $bg-urgent    $bg-urgent   $text          $bar		$bar
 
 #
 # Status Bar:
