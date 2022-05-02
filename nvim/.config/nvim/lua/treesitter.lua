@@ -1,4 +1,4 @@
-local configs = require('nvim-treesitter.configs')
+local configs = require("nvim-treesitter.configs")
 
 configs.setup {
     highlight = {enable = true},
@@ -14,6 +14,6 @@ configs.setup {
     indent = {enable = true}
 }
 
---utils.opt('o', 'foldlevelstart', 20)
---utils.opt('o', 'foldmethod', 'expr')
---utils.opt('o', 'foldexpr', 'nvim_treesitter#foldexpr()')
+--utils.opt("o", "foldlevelstart", 20)
+--utils.opt("o", "foldmethod", "expr")
+--utils.opt("o", "foldexpr", "nvim_treesitter#foldexpr()")

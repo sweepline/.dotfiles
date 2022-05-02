@@ -104,6 +104,11 @@ _G.packer_plugins = {
     path = "/home/mikkel/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/hoob3rt/lualine.nvim"
   },
+  neovim = {
+    loaded = true,
+    path = "/home/mikkel/.local/share/nvim/site/pack/packer/start/neovim",
+    url = "https://github.com/rose-pine/neovim"
+  },
   ["nvim-cmp"] = {
     loaded = true,
     path = "/home/mikkel/.local/share/nvim/site/pack/packer/start/nvim-cmp",
