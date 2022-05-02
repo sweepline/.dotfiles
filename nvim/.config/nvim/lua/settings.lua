@@ -21,8 +21,10 @@ utils.opt('o', 'wildmode', 'list:longest')
 utils.opt('o', 'cursorline', false)
 utils.opt('w', 'number', true)
 utils.opt('w', 'relativenumber', false)
+utils.opt('o', 'cursorline', true)
 
 utils.opt('o', 'listchars', 'tab:▷ ,trail:·,extends:◣,precedes:◢,nbsp:○')
+
 
 -- Highlight yank
 cmd 'au TextYankPost * lua vim.highlight.on_yank {on_visual = false}'
@@ -35,3 +37,4 @@ cmd [[autocmd InsertLeave * syn match ExtraWhitespace /\s\+$\| \+\ze\t/]]
 cmd [[autocmd InsertEnter * syn clear ExtraWhitespace]]
 
 vim.g.tidal_target = "terminal"
+

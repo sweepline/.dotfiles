@@ -1,8 +1,6 @@
-local utils = require( 'utils')
 local configs = require('nvim-treesitter.configs')
 
 configs.setup {
-    ensure_installed = "maintained",
     highlight = {enable = true},
     incremental_selection = {
         enable = true,

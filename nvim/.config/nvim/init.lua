@@ -25,8 +25,11 @@ vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile' -- Auto compile when th
 
 -- Load other configs
 require('plugins')
-
 require('keymappings')
+require('ui')
+require('lsp')
+require('completion')
+require('treesitter')
+require('search')
 
-require('config')
-
+require('nvim_comment').setup()

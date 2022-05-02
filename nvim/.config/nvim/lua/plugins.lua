@@ -28,7 +28,8 @@ return require('packer').startup(function()
 
 	use { 'tikhomirov/vim-glsl' }
 
-	use { 'sainnhe/gruvbox-material' }
+	use { "ellisonleao/gruvbox.nvim" }
+	use { "glepnir/zephyr-nvim" }
 
 	use { 'terrortylor/nvim-comment' }
 

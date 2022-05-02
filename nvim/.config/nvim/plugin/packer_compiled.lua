@@ -94,10 +94,10 @@ _G.packer_plugins = {
     path = "/home/mikkel/.local/share/nvim/site/pack/packer/start/cmp-vsnip",
     url = "https://github.com/hrsh7th/cmp-vsnip"
   },
-  ["gruvbox-material"] = {
+  ["gruvbox.nvim"] = {
     loaded = true,
-    path = "/home/mikkel/.local/share/nvim/site/pack/packer/start/gruvbox-material",
-    url = "https://github.com/sainnhe/gruvbox-material"
+    path = "/home/mikkel/.local/share/nvim/site/pack/packer/start/gruvbox.nvim",
+    url = "https://github.com/ellisonleao/gruvbox.nvim"
   },
   ["lualine.nvim"] = {
     loaded = true,
@@ -139,6 +139,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/mikkel/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
+  },
+  ["telescope-ui-select.nvim"] = {
+    loaded = true,
+    path = "/home/mikkel/.local/share/nvim/site/pack/packer/start/telescope-ui-select.nvim",
+    url = "https://github.com/nvim-telescope/telescope-ui-select.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,
