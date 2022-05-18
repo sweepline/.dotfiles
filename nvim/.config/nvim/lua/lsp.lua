@@ -30,7 +30,9 @@ vim.lsp.protocol.CompletionItemKind = {
 }
 
 -- Setup lspconfig.
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp
+                                                                     .protocol
+                                                                     .make_client_capabilities())
 
 -- Mappings
 local opts = {noremap = true, silent = true}
@@ -43,14 +45,15 @@ vim.api.nvim_set_keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>",
                         opts)
 vim.api.nvim_set_keymap("n", "<space>q",
                         "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
-vim.api.nvim_set_keymap("n", "<space><Tab>", "<cmd>lua vim.lsp.buf.formatting()<CR>",
-                        opts)
+vim.api.nvim_set_keymap("n", "<space><Tab>",
+                        "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 
 -- Your custom attach function for nvim-lspconfig goes here.
 local on_attach = function(client, bufnr)
     local function buf_set_keymap(...)
         vim.api.nvim_buf_set_keymap(bufnr, ...)
     end
+
     local function buf_set_option(...)
         vim.api.nvim_buf_set_option(bufnr, ...)
     end
@@ -84,7 +87,8 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "<space>ca",
                                 "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "<space>cr",
-                                "<cmd>lua vim.lsp.buf.range_code_action()<CR>", opts)
+                                "<cmd>lua vim.lsp.buf.range_code_action()<CR>",
+                                opts)
 
     vim.api.nvim_buf_set_keymap(bufnr, "n", "<space>wa",
                                 "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>",
@@ -133,9 +137,8 @@ nvim_lsp.pyright.setup {on_attach = on_attach, capabilities = capabilities}
 
 nvim_lsp.rust_analyzer.setup {
     on_attach = on_attach,
-    capabilities = capabilities,
-    -- settings = {
-    --     ["rust-analyzer"] = {
+    capabilities = capabilities
+    -- settings = { ["rust-analyzer"] = { checkOnSave = { command = "clippy" } } }
     --         checkOnSave = {
     --             allFeatures = true,
     --             overrideCommand = {
@@ -217,4 +220,3 @@ nvim_lsp.efm.setup {
     filetypes = vim.tbl_keys(languages),
     settings = {rootMarkers = {".git/"}, languages = languages}
 }
-

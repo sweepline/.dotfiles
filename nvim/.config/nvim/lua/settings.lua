@@ -20,6 +20,9 @@ vim.opt.cursorline = true
 
 vim.opt.listchars = "tab:▷ ,trail:·,extends:◣,precedes:◢,nbsp:○"
 
+-- close buffer without closing window
+vim.cmd("command BD b#|bd#")
+
 -- Highlight yank
 vim.cmd("au TextYankPost * lua vim.highlight.on_yank {on_visual = false}")
 
