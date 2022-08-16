@@ -1,5 +1,5 @@
 local function map(mode, lhs, rhs, opts)
-	local options = {noremap = true}
+	local options = { noremap = true }
 	if opts then options = vim.tbl_extend("force", options, opts) end
 	vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
@@ -29,3 +29,5 @@ map("n", "<Leader>is", "<cmd>Telescope git_status<CR>")
 map("n", "<C-w>>", "20<C-w>>")
 map("n", "<C-w><", "20<C-w><")
 
+-- surround
+require("nvim-surround").setup({})

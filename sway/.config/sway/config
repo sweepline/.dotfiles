@@ -59,7 +59,7 @@ exec swayidle -w \
 
 bindsym $mod+Shift+w exec '$lockscreen'
 
-seat * hide_cursor 3000
+seat * hide_cursor when-typing enable
 
 ### Input configuration
 #

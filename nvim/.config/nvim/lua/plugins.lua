@@ -33,6 +33,11 @@ return require("packer").startup(function()
 
 	use { "terrortylor/nvim-comment" }
 
+	use({
+		"kylechui/nvim-surround",
+		tag = "*", -- Use for stability; omit for the latest features
+	})
+
 	use {
 		"hoob3rt/lualine.nvim",
 		requires = { "kyazdani42/nvim-web-devicons", opt = true }
