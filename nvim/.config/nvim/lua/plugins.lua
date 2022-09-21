@@ -2,8 +2,10 @@ return require("packer").startup(function()
 
 	use { "wbthomason/packer.nvim", opt = true }
 
+
 	-- LSP and coding things
 
+	use { "williamboman/mason.nvim" }
 	use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
 
 	use {

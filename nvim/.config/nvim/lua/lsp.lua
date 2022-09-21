@@ -1,3 +1,5 @@
+require("mason").setup()
+
 local nvim_lsp = require("lspconfig")
 
 -- Icons
@@ -197,10 +199,8 @@ local eslint = {
 -- local autopep8 = {formatCommand = "autopep8 -", formatStdin = true}
 local black = {formatCommand = "black -", formatStdin = true}
 
-local luaformat = {formatCommand = "lua-format -i", formatStdin = true}
-
 local languages = {
-    lua = {luaformat},
+    -- lua = {luaformat},
     -- typescript = {eslint},
     -- javascript = {eslint},
     -- typescriptreact = {eslint},

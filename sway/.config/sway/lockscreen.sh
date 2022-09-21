@@ -1,11 +1,8 @@
-swaylock \
+swaylock -i ~/Pictures/wallpapers/birds.png \
+	-e \
 	-f \
-	--screenshots \
-	--clock \
-	--indicator \
 	--indicator-radius 200 \
 	--indicator-thickness 7 \
-	--effect-blur 8x8 \
 	--text-color ebdbb2 \
 	--text-clear-color ebdbb2 \
 	--text-ver-color ebdbb2 \
@@ -23,7 +20,4 @@ swaylock \
 	--inside-clear-color 00000088 \
 	--inside-ver-color 00000088 \
 	--inside-wrong-color 00000088 \
-	--separator-color 00000000 \
-	--grace 8 \
-	--grace-no-mouse \
-	--fade-in 0.2
+	--separator-color 00000000
