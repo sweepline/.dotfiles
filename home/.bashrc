@@ -37,4 +37,6 @@ alias cpi="cp -riv"
 alias mkdiri="mkdir -vp"
 alias rmi="rm -v"
 
-eval $(keychain --eval --quiet id_ed25519)
+if [ "$TERM" != "linux" ]; then
+  eval $(keychain --eval --quiet id_ed25519)
+fi
