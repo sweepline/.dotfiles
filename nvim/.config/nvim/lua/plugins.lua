@@ -22,7 +22,6 @@ return require("packer").startup(function()
 	use { "hrsh7th/cmp-path" }
 	use { "hrsh7th/cmp-cmdline" }
 	use { "hrsh7th/nvim-cmp" }
-
 	use { "hrsh7th/cmp-vsnip" }
 	use { "hrsh7th/vim-vsnip" }
 
@@ -30,8 +29,8 @@ return require("packer").startup(function()
 
 	use { "tikhomirov/vim-glsl" }
 
-	use { "ellisonleao/gruvbox.nvim" }
-	use { "rose-pine/neovim" }
+	use { "sainnhe/gruvbox-material" }
+	-- use { "rose-pine/neovim" }
 
 	use { "terrortylor/nvim-comment" }
 
@@ -46,7 +45,4 @@ return require("packer").startup(function()
 	}
 
 	use { "tpope/vim-fugitive" }
-
-	use { "tidalcycles/vim-tidal" }
-
 end)

@@ -29,10 +29,10 @@ vim.cmd("au TextYankPost * lua vim.highlight.on_yank {on_visual = false}")
 vim.cmd("au BufRead /home/mikkel/repos/mono/**.py setlocal sw=4 ts=4 sts=4 noet")
 
 -- Highlight trailing whitespace
-vim.cmd(
-    "autocmd ColorScheme * highlight ExtraWhitespace ctermbg=darkred guibg=darkred")
-vim.cmd([[autocmd InsertLeave * syn match ExtraWhitespace /\s\+$\| \+\ze\t/]])
-vim.cmd("autocmd InsertEnter * syn clear ExtraWhitespace")
+-- vim.cmd(
+--     "autocmd ColorScheme * highlight ExtraWhitespace ctermbg=darkred guibg=darkred")
+-- vim.cmd([[autocmd InsertLeave * syn match ExtraWhitespace /\s\+$\| \+\ze\t/]])
+-- vim.cmd("autocmd InsertEnter * syn clear ExtraWhitespace")
 
 vim.g.tidal_target = "terminal"
 

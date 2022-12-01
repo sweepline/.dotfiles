@@ -99,20 +99,20 @@ _G.packer_plugins = {
     path = "/home/mikkel/.local/share/nvim/site/pack/packer/start/cmp-vsnip",
     url = "https://github.com/hrsh7th/cmp-vsnip"
   },
-  ["gruvbox.nvim"] = {
+  ["gruvbox-material"] = {
     loaded = true,
-    path = "/home/mikkel/.local/share/nvim/site/pack/packer/start/gruvbox.nvim",
-    url = "https://github.com/ellisonleao/gruvbox.nvim"
+    path = "/home/mikkel/.local/share/nvim/site/pack/packer/start/gruvbox-material",
+    url = "https://github.com/sainnhe/gruvbox-material"
   },
   ["lualine.nvim"] = {
     loaded = true,
     path = "/home/mikkel/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/hoob3rt/lualine.nvim"
   },
-  neovim = {
+  ["mason.nvim"] = {
     loaded = true,
-    path = "/home/mikkel/.local/share/nvim/site/pack/packer/start/neovim",
-    url = "https://github.com/rose-pine/neovim"
+    path = "/home/mikkel/.local/share/nvim/site/pack/packer/start/mason.nvim",
+    url = "https://github.com/williamboman/mason.nvim"
   },
   ["nvim-cmp"] = {
     loaded = true,
@@ -174,11 +174,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/mikkel/.local/share/nvim/site/pack/packer/start/vim-glsl",
     url = "https://github.com/tikhomirov/vim-glsl"
-  },
-  ["vim-tidal"] = {
-    loaded = true,
-    path = "/home/mikkel/.local/share/nvim/site/pack/packer/start/vim-tidal",
-    url = "https://github.com/tidalcycles/vim-tidal"
   },
   ["vim-vsnip"] = {
     loaded = true,
