@@ -81,7 +81,7 @@ seat * hide_cursor when-typing enable
 
 input "1204:1296:HID_Keyboard_HID_Keyboard" {
 	xkb_layout us
-    xkb_options ctrl:nocaps,compose:menu,korean:ralt_hangul,korean:rctrl_hanja
+    xkb_options ctrl:nocaps,compose:ralt
 	xkb_numlock enable
 }
 
@@ -283,6 +283,6 @@ gaps inner 10
 smart_gaps on
 
 # Autostart
-exec --no-startup-id fcitx5 -d
+exec mako
 
 include /etc/sway/config.d/*

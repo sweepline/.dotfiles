@@ -46,7 +46,7 @@ vim.api.nvim_set_keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>",
 vim.api.nvim_set_keymap("n", "<space>q",
 	"<cmd>Telescope diagnostics bufnr=0<CR>", opts)
 vim.api.nvim_set_keymap("n", "<space><Tab>",
-	"<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+	"<cmd>lua vim.lsp.buf.format { async = true }<CR>", opts)
 
 -- Your custom attach function for nvim-lspconfig goes here.
 local on_attach = function(client, bufnr)
@@ -115,7 +115,7 @@ nvim_lsp.cssls.setup {
 local eslint_on_attach = function(client, bufnr)
 	on_attach(client, bufnr)
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "<space><Tab>",
-		"<cmd>:execute 'lua vim.lsp.buf.formatting()' | EslintFixAll <CR>",
+		"<cmd>:EslintFixAll <CR>",
 		opts)
 end
 
@@ -151,15 +151,8 @@ nvim_lsp.rust_analyzer.setup {
 }
 
 nvim_lsp.tsserver.setup {
-	-- capabilities = capabilities,
-	on_attach = function(client, bufnr)
-		if client.config.flags then
-			client.config.flags.allow_incremental_sync = true
-		end
-		client.resolved_capabilities.document_formatting = false
-		on_attach(client, bufnr)
-	end
-
+	on_attach = on_attach,
+	capabilities = capabilities,
 }
 
 -- nvim_lsp.clangd.setup { on_attach = on_attach, capabilities = capabilities }
