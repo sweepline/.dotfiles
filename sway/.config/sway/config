@@ -24,7 +24,7 @@ set $menu wofi --show run
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg ~/Pictures/wallpapers/train.jpg fill
+output * bg ~/Pictures/wallpapers/launch.jpg fill
 
 #
 # Example configuration:
@@ -32,7 +32,7 @@ output * bg ~/Pictures/wallpapers/train.jpg fill
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
-output 'Dell Inc. DELL U2717D ND7GD846719S' resolution 2560x1440 position 0,0
+output 'Dell Inc. DELL U2722D DX7VWN3' resolution 2560x1440 position 0,0
 output 'Dell Inc. DELL U2722D 50FDGH3' resolution 2560x1440 position 2560,0 transform 0
 
 ### Idle configuration
@@ -83,6 +83,10 @@ input "1204:1296:HID_Keyboard_HID_Keyboard" {
 	xkb_layout us
     xkb_options ctrl:nocaps,compose:ralt
 	xkb_numlock enable
+}
+
+input "1133:49298:Logitech_G102_LIGHTSYNC_Gaming_Mouse" {
+	accel_profile flat
 }
 
 ### Key bindings
@@ -221,10 +225,10 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Multimedia
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
-bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym --locked XF86AudioPlay exec playerctl play-pause
+bindsym $mod+i exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym $mod+u exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym $mod+o exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym --locked $mod+p exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 

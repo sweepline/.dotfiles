@@ -1,4 +1,4 @@
-swaylock -i ~/Pictures/wallpapers/birds.png \
+swaylock -i ~/Pictures/wallpapers/train.jpg \
 	-e \
 	-f \
 	--indicator-radius 200 \

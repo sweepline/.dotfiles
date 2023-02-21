@@ -34,6 +34,8 @@ return require("packer").startup(function()
 
 	use { "terrortylor/nvim-comment" }
 
+	--use { "m4xshen/autoclose.nvim" }
+
 	use({
 		"kylechui/nvim-surround",
 		tag = "*", -- Use for stability; omit for the latest features
