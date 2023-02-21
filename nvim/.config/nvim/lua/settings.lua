@@ -35,5 +35,3 @@ vim.cmd("au BufRead /home/mikkel/repos/mono/**.py setlocal sw=4 ts=4 sts=4 noet"
 -- vim.cmd("autocmd InsertEnter * syn clear ExtraWhitespace")
 
 vim.g.tidal_target = "terminal"
-
-require("autoclose").setup({})
