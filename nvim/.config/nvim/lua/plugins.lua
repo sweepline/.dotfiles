@@ -1,36 +1,49 @@
 return require("packer").startup(function()
-
 	use { "wbthomason/packer.nvim", opt = true }
 
 	-- LSP and coding things
 
+	-- Semantic highlight and symbols
 	use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
 
+	-- Popup window for file search and stuff
 	use {
 		"nvim-telescope/telescope.nvim",
 		requires = { { "nvim-lua/plenary.nvim" }, { "kyazdani42/nvim-web-devicons" } }
 	}
-
 	use { "nvim-telescope/telescope-ui-select.nvim" }
 
-	use { "neovim/nvim-lspconfig" }
+	-- LSP config and installer
+	use {
+		"williamboman/mason.nvim",
+		"williamboman/mason-lspconfig.nvim",
+		"neovim/nvim-lspconfig",
+	}
 
+	-- Debug Adapter protocol
+	use { 'mfussenegger/nvim-dap' }
+
+	-- Autocomplete
 	use { "hrsh7th/cmp-nvim-lsp" }
 	use { "hrsh7th/cmp-buffer" }
 	use { "hrsh7th/cmp-path" }
 	use { "hrsh7th/cmp-cmdline" }
 	use { "hrsh7th/nvim-cmp" }
-
 	use { "hrsh7th/cmp-vsnip" }
 	use { "hrsh7th/vim-vsnip" }
 
-	-- Fluff
+	-- Lint and formatting
+	use { "jose-elias-alvarez/null-ls.nvim",
+		requires = { "nvim-lua/plenary.nvim" },
+	}
 
+	-- HTTP Requests
 	use {
 		"rest-nvim/rest.nvim",
 		requires = { "nvim-lua/plenary.nvim" },
 	}
 
+	-- Cargo.toml version highlight
 	use {
 		'saecki/crates.nvim',
 		event = { "BufRead Cargo.toml" },
@@ -40,25 +53,28 @@ return require("packer").startup(function()
 		end,
 	}
 
+	-- glsl highlight
 	use { "tikhomirov/vim-glsl" }
 
-	use { "ellisonleao/gruvbox.nvim" }
-	use { "rose-pine/neovim" }
-
+	-- Auto comment
 	use { "terrortylor/nvim-comment" }
 
+	-- Surround stuff
 	use({
 		"kylechui/nvim-surround",
 		tag = "*", -- Use for stability; omit for the latest features
 	})
 
+	-- Bar
 	use {
 		"hoob3rt/lualine.nvim",
 		requires = { "kyazdani42/nvim-web-devicons", opt = true }
 	}
 
+	-- Git
 	use { "tpope/vim-fugitive" }
 
-	use { "tidalcycles/vim-tidal" }
-
+	-- Color schemes
+	use { "sainnhe/gruvbox-material" }
+	use { "rose-pine/neovim" }
 end)

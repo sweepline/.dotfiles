@@ -1,3 +1,5 @@
+require("mason").setup()
+require("mason-lspconfig").setup()
 local nvim_lsp = require("lspconfig")
 
 -- Icons
@@ -97,35 +99,41 @@ local on_attach = function(client, bufnr)
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "<space>wl",
 		"<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
 		opts)
-
 end
 
 nvim_lsp.html.setup {
-	cmd = { "vscode-html-languageserver", "--stdio" },
 	on_attach = on_attach,
 	capabilities = capabilities
 }
 
 nvim_lsp.cssls.setup {
-	cmd = { "vscode-css-languageserver", "--stdio" },
 	on_attach = on_attach,
 	capabilities = capabilities
 }
 
-local eslint_on_attach = function(client, bufnr)
-	on_attach(client, bufnr)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "<space><Tab>",
-		"<cmd>:EslintFixAll<CR>",
-		opts)
-end
-
-nvim_lsp.eslint.setup {
-	cmd = { "vscode-eslint-language-server", "--stdio" },
-	on_attach = eslint_on_attach,
+nvim_lsp.cssmodules_ls.setup {
+	on_attach = on_attach,
 	capabilities = capabilities
 }
 
-nvim_lsp.sumneko_lua.setup {
+nvim_lsp.tailwindcss.setup {
+	on_attach = on_attach,
+	capabilities = capabilities
+}
+
+nvim_lsp.tsserver.setup {
+	capabilities = capabilities,
+	on_attach = function(client, bufnr)
+		if client.config.flags then
+			client.config.flags.allow_incremental_sync = true
+		end
+		client.server_capabilities.document_formatting = false
+		on_attach(client, bufnr)
+	end
+
+}
+
+nvim_lsp.lua_ls.setup {
 	on_attach = on_attach,
 	capabilities = capabilities,
 	settings = { Lua = { diagnostics = { globals = { "vim", "use" } } } }
@@ -148,62 +156,12 @@ nvim_lsp.rust_analyzer.setup {
 	-- }
 }
 
-nvim_lsp.tsserver.setup {
-	capabilities = capabilities,
-	on_attach = function(client, bufnr)
-		if client.config.flags then
-			client.config.flags.allow_incremental_sync = true
-		end
-		client.server_capabilities.document_formatting = false
-		on_attach(client, bufnr)
-	end
-
-}
-
 nvim_lsp.clangd.setup { on_attach = on_attach, capabilities = capabilities }
 
 nvim_lsp.gdscript.setup { on_attach = on_attach, capabilities = capabilities }
 
--- EFM Setup for ESLint
+nvim_lsp.sqlls.setup { on_attach = on_attach, capabilities = capabilities }
 
-local prettier = {
-	formatCommand = "prettier --stdin-filepath ${INPUT}",
-	formatStdin = true
-}
+nvim_lsp.dockerls.setup { on_attach = on_attach, capabilities = capabilities }
 
-local stylelint = {
-	lintCommand = "stylelint --stdin --stdin-filename ${INPUT} --formatter compact",
-	lintIgnoreExitCode = true,
-	lintStdin = true,
-	lintFormats = {
-		"%f: line %l, col %c, %tarning - %m", "%f: line %l, col %c, %trror - %m"
-	},
-	formatCommand = "prettier --stdin-filepath ${INPUT}",
-	formatStdin = true
-}
-
--- local autopep8 = {formatCommand = "autopep8 -", formatStdin = true}
-local black = { formatCommand = "black -", formatStdin = true }
-
-local languages = {
-	-- lua = { luaformat },
-	-- typescript = {eslint},
-	-- javascript = {eslint},
-	-- typescriptreact = {eslint},
-	-- javascriptreact = {eslint},
-	json = { prettier },
-	html = { prettier },
-	htmldjango = { prettier },
-	css = { stylelint },
-	scss = { stylelint },
-	markdown = { prettier },
-	python = { black }
-}
-
-nvim_lsp.efm.setup {
-	capabilities = capabilities,
-	on_attach = on_attach,
-	init_options = { documentFormatting = true, codeAction = true },
-	filetypes = vim.tbl_keys(languages),
-	settings = { rootMarkers = { ".git/" }, languages = languages }
-}
+nvim_lsp.wgsl_analyzer.setup { on_attach = on_attach, capabilities = capabilities }

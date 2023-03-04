@@ -24,7 +24,7 @@ require('telescope').setup {
 		-- sorting_strategies = "descending"
 	},
 	extensions = {
-		["ui-select"] = {
+			["ui-select"] = {
 			require("telescope.themes").get_dropdown {
 				-- even more opts
 			}

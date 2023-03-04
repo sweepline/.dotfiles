@@ -1,21 +1,21 @@
 local lualine = require("lualine")
 
 lualine.setup {
-    options = {
-        theme = "rose-pine",
-        -- section_separators = {"", ""},
-        -- component_separators = {"", ""},
-        section_separators = "",
-        component_separators = ""
-    },
-    sections = {lualine_c = {{"filename", file_status = true, path = 1}}}
+	options = {
+		theme = "rose-pine",
+		-- section_separators = {"", ""},
+		-- component_separators = {"", ""},
+		section_separators = "",
+		component_separators = ""
+	},
+	sections = { lualine_c = { { "filename", file_status = true, path = 1 } } }
 }
 
 -- Colorcheme
 
 require("rose-pine").setup({
-    ---@usage "main"|"moon"
-    dark_variant = "main"
+	---@usage "main"|"moon"
+	dark_variant = "main"
 })
 
 vim.opt.termguicolors = true

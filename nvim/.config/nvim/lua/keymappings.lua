@@ -8,7 +8,7 @@ end
 -- Some completion keymaps in `completion.lua`
 
 map("n", "<C-l>", "<cmd>noh<CR>") -- Clear Highlights
-map("i", "jk", "<Esc>") -- jk to escape
+map("i", "jk", "<Esc>")           -- jk to escape
 map("i", "<C-Space>", "<C-x><C-o>")
 map("t", "<Esc>", "<C-\\><C-n>")
 
