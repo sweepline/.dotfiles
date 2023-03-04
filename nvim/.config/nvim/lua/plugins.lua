@@ -26,6 +26,20 @@ return require("packer").startup(function()
 
 	-- Fluff
 
+	use {
+		"rest-nvim/rest.nvim",
+		requires = { "nvim-lua/plenary.nvim" },
+	}
+
+	use {
+		'saecki/crates.nvim',
+		event = { "BufRead Cargo.toml" },
+		requires = { { 'nvim-lua/plenary.nvim' } },
+		config = function()
+			require('crates').setup()
+		end,
+	}
+
 	use { "tikhomirov/vim-glsl" }
 
 	use { "ellisonleao/gruvbox.nvim" }

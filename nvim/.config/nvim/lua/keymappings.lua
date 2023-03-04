@@ -25,6 +25,10 @@ map("n", "<Leader>ic", "<cmd>Telescope git_bcommits<CR>")
 map("n", "<Leader>ib", "<cmd>Telescope git_branches<CR>")
 map("n", "<Leader>is", "<cmd>Telescope git_status<CR>")
 
+map("n", "<Leader>rj", "<Plug>RestNvim")
+map("n", "<Leader>rk", "<Plug>RestNvimPreviw")
+map("n", "<Leader>rl", "<Plug>RestNvimLast")
+
 -- Split resizing
 map("n", "<C-w>>", "20<C-w>>")
 map("n", "<C-w><", "20<C-w><")

@@ -16,6 +16,6 @@ configs.setup {
 
 vim.wo.foldmethod = "expr"
 vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
-vim.cmd("set foldlevelstart=20") -- start folded
+vim.o.foldlevelstart = 20 -- start folded if more than 20
 vim.wo.foldnestmax = 3
 vim.wo.foldminlines = 5

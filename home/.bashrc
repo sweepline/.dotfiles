@@ -20,7 +20,10 @@ alias localstack="$HOME/repos/mono/scripts/localstack.py"
 export SCCACHE_REDIS=redis://esa
 alias pyscadmin="ssh -t ws6 pyscadmin"
 
+alias bp="bpython"
 alias mvi="mv -iv"
 alias cpi="cp -riv"
 alias mkdiri="mkdir -vp"
 alias rmi="rm -v"
+
+eval $(keychain --eval --quiet id_ed25519)
