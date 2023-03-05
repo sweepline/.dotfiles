@@ -15,6 +15,11 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.npm-global:$PATH"
 export PATH="$HOME/.emacs.d/bin:$PATH"
 
+# pnpm
+export PNPM_HOME="/home/mikkel/.local/share/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end
+
 alias vimf="nvim \$(fzf --height 40%)"
 alias localstack="$HOME/repos/mono/scripts/localstack.py"
 export SCCACHE_REDIS=redis://esa
