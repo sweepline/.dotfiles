@@ -2,7 +2,7 @@ local lualine = require("lualine")
 
 lualine.setup {
 	options = {
-		theme = "rose-pine",
+		theme = "gruvbox-material",
 		-- section_separators = {"", ""},
 		-- component_separators = {"", ""},
 		section_separators = "",
@@ -19,5 +19,6 @@ require("rose-pine").setup({
 })
 
 vim.opt.termguicolors = true
-vim.opt.background = "dark"
-vim.cmd("colorscheme rose-pine")
+vim.opt.background = "light"
+-- vim.cmd("colorscheme rose-pine")
+vim.cmd("colorscheme gruvbox-material")

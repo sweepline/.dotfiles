@@ -34,6 +34,4 @@ vim.cmd(
 vim.cmd([[autocmd InsertLeave * syn match ExtraWhitespace /\s\+$\| \+\ze\t/]])
 vim.cmd("autocmd InsertEnter * syn clear ExtraWhitespace")
 
-vim.g.tidal_target = "terminal"
-
 vim.filetype.add({ extension = { wgsl = "wgsl" } })

@@ -2,6 +2,9 @@ require("mason").setup()
 require("mason-lspconfig").setup()
 local nvim_lsp = require("lspconfig")
 
+vim.g.coq_settings = { auto_start = 'shut-up', completion = { always = false } }
+local coq = require "coq"
+
 -- Icons
 vim.lsp.protocol.CompletionItemKind = {
 	"", -- Text
@@ -31,9 +34,6 @@ vim.lsp.protocol.CompletionItemKind = {
 	"" -- TypeParameter
 }
 
--- Setup lspconfig.
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
 -- Mappings
 local opts = { noremap = true, silent = true }
 
@@ -50,17 +50,7 @@ vim.api.nvim_set_keymap("n", "<space><Tab>",
 
 -- Your custom attach function for nvim-lspconfig goes here.
 local on_attach = function(client, bufnr)
-	local function buf_set_keymap(...)
-		vim.api.nvim_buf_set_keymap(bufnr, ...)
-	end
-
-	local function buf_set_option(...)
-		vim.api.nvim_buf_set_option(bufnr, ...)
-	end
-
-	-- Enable completion triggered by <c-x><c-o>
-	buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
-
+	vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 	-- Mappings.
 	-- See `:help vim.lsp.*` for documentation on any of the below functions
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "gd",
@@ -101,28 +91,11 @@ local on_attach = function(client, bufnr)
 		opts)
 end
 
-nvim_lsp.html.setup {
-	on_attach = on_attach,
-	capabilities = capabilities
-}
-
-nvim_lsp.cssls.setup {
-	on_attach = on_attach,
-	capabilities = capabilities
-}
-
-nvim_lsp.cssmodules_ls.setup {
-	on_attach = on_attach,
-	capabilities = capabilities
-}
-
-nvim_lsp.tailwindcss.setup {
-	on_attach = on_attach,
-	capabilities = capabilities
-}
-
-nvim_lsp.tsserver.setup {
-	capabilities = capabilities,
+nvim_lsp.html.setup(coq.lsp_ensure_capabilities { on_attach = on_attach })
+nvim_lsp.cssls.setup(coq.lsp_ensure_capabilities { on_attach = on_attach })
+nvim_lsp.unocss.setup(coq.lsp_ensure_capabilities { on_attach = on_attach })
+nvim_lsp.cssmodules_ls.setup(coq.lsp_ensure_capabilities { on_attach = on_attach })
+nvim_lsp.tsserver.setup(coq.lsp_ensure_capabilities {
 	on_attach = function(client, bufnr)
 		if client.config.flags then
 			client.config.flags.allow_incremental_sync = true
@@ -130,21 +103,18 @@ nvim_lsp.tsserver.setup {
 		client.server_capabilities.document_formatting = false
 		on_attach(client, bufnr)
 	end
+})
 
-}
+nvim_lsp.lua_ls.setup(coq.lsp_ensure_capabilities {
+	on_attach = on_attach, settings = {
+	Lua = { diagnostics = { globals = { "vim", "use" } } } }
+})
 
-nvim_lsp.lua_ls.setup {
+nvim_lsp.pyright.setup(coq.lsp_ensure_capabilities { on_attach = on_attach })
+
+nvim_lsp.rust_analyzer.setup(coq.lsp_ensure_capabilities {
 	on_attach = on_attach,
-	capabilities = capabilities,
-	settings = { Lua = { diagnostics = { globals = { "vim", "use" } } } }
-}
-
-nvim_lsp.pyright.setup { on_attach = on_attach, capabilities = capabilities }
-
-nvim_lsp.rust_analyzer.setup {
-	on_attach = on_attach,
-	capabilities = capabilities
-	-- settings = { ["rust-analyzer"] = { checkOnSave = { command = "clippy" } } }
+	-- settings = { ["rust-analyzer"] = { checkOnSave = { command = "clippy" } } }k
 	--         checkOnSave = {
 	--             allFeatures = true,
 	--             overrideCommand = {
@@ -154,14 +124,10 @@ nvim_lsp.rust_analyzer.setup {
 	--         }
 	--     }
 	-- }
-}
+})
 
-nvim_lsp.clangd.setup { on_attach = on_attach, capabilities = capabilities }
-
-nvim_lsp.gdscript.setup { on_attach = on_attach, capabilities = capabilities }
-
-nvim_lsp.sqlls.setup { on_attach = on_attach, capabilities = capabilities }
-
-nvim_lsp.dockerls.setup { on_attach = on_attach, capabilities = capabilities }
-
-nvim_lsp.wgsl_analyzer.setup { on_attach = on_attach, capabilities = capabilities }
+nvim_lsp.clangd.setup(coq.lsp_ensure_capabilities { on_attach = on_attach })
+nvim_lsp.gdscript.setup(coq.lsp_ensure_capabilities { on_attach = on_attach })
+nvim_lsp.sqlls.setup(coq.lsp_ensure_capabilities { on_attach = on_attach })
+nvim_lsp.dockerls.setup(coq.lsp_ensure_capabilities { on_attach = on_attach })
+nvim_lsp.wgsl_analyzer.setup(coq.lsp_ensure_capabilities { on_attach = on_attach })

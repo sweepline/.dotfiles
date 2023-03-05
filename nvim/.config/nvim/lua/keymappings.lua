@@ -9,9 +9,8 @@ end
 
 map("n", "<C-l>", "<cmd>noh<CR>") -- Clear Highlights
 map("i", "jk", "<Esc>")           -- jk to escape
-map("i", "<C-Space>", "<C-x><C-o>")
-map("t", "<Esc>", "<C-\\><C-n>")
 
+map("n", "<C-p>", "<cmd>Telescope find_files<CR>")
 map("n", "<Leader>ff", "<cmd>Telescope find_files<CR>")
 map("n", "<Leader>fr", "<cmd>Telescope resume<CR>")
 map("n", "<Leader>fg", "<cmd>Telescope live_grep<CR>")
