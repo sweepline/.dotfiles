@@ -17,6 +17,7 @@ config.font = wezterm.font "Iosevka Term Slab"
 config.font_size = 14
 config.color_scheme = 'Gruvbox Light'
 config.enable_tab_bar = false
+--config.disable_default_key_bindings = true
 
 -- and finally, return the configuration to wezterm
 return config
