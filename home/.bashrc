@@ -30,5 +30,3 @@ alias mvi="mv -iv"
 alias cpi="cp -riv"
 alias mkdiri="mkdir -vp"
 alias rmi="rm -v"
-
-eval $(keychain --eval --quiet id_ed25519)
