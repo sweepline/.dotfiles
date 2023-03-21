@@ -1,4 +1,4 @@
-swaylock -i ~/.config/sway/lockscreen.jpg \
+swaylock -i ~/Pictures/wallpapers/ferrari.jpg \
 	-e \
 	-f \
 	--indicator-radius 200 \
