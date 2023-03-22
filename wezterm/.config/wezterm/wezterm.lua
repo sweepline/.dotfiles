@@ -13,7 +13,7 @@ end
 -- This is where you actually apply your config choices
 
 -- For example, changing the color scheme:
-config.font = wezterm.font "Iosevka Term Slab"
+config.font = wezterm.font "Iosevka Fixed Slab"
 config.font_size = 14
 config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
 config.color_scheme = 'Gruvbox Light'
