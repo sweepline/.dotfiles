@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 
 # Personal
+
+# Realtime History
+shopt -s histappend
+PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
+
+
 source /usr/share/fzf/key-bindings.bash
 source /usr/share/fzf/completion.bash
 

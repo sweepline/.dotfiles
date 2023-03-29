@@ -45,8 +45,20 @@ vim.api.nvim_set_keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>",
 	opts)
 vim.api.nvim_set_keymap("n", "<space>q",
 	"<cmd>Telescope diagnostics bufnr=0<CR>", opts)
-vim.api.nvim_set_keymap("n", "<space><Tab>",
-	"<cmd>lua vim.lsp.buf.format { async = true }<CR>", opts)
+local lsp_formatting = function(bufnr)
+	vim.lsp.buf.format({
+		async = true,
+		filter = function(client)
+			-- apply whatever logic you want (in this example, we'll only use null-ls)
+			return client.name == "null-ls"
+		end,
+		bufnr = bufnr,
+	})
+end
+vim.keymap.set("n", "<space><Tab>", lsp_formatting);
+-- vim.api.nvim_set_keymap("n", "<space><Tab>",
+--	"<cmd>lua vim.lsp.buf.format { async = true }<CR>", opts)
+
 
 -- Your custom attach function for nvim-lspconfig goes here.
 local on_attach = function(client, bufnr)
@@ -95,15 +107,7 @@ nvim_lsp.html.setup(coq.lsp_ensure_capabilities { on_attach = on_attach })
 nvim_lsp.cssls.setup(coq.lsp_ensure_capabilities { on_attach = on_attach })
 nvim_lsp.unocss.setup(coq.lsp_ensure_capabilities { on_attach = on_attach })
 nvim_lsp.cssmodules_ls.setup(coq.lsp_ensure_capabilities { on_attach = on_attach })
-nvim_lsp.tsserver.setup(coq.lsp_ensure_capabilities {
-	on_attach = function(client, bufnr)
-		if client.config.flags then
-			client.config.flags.allow_incremental_sync = true
-		end
-		client.server_capabilities.document_formatting = false
-		on_attach(client, bufnr)
-	end
-})
+nvim_lsp.tsserver.setup(coq.lsp_ensure_capabilities { on_attach = on_attach })
 
 nvim_lsp.lua_ls.setup(coq.lsp_ensure_capabilities {
 	on_attach = on_attach, settings = {
