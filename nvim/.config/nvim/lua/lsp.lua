@@ -2,8 +2,7 @@ require("mason").setup()
 require("mason-lspconfig").setup()
 local nvim_lsp = require("lspconfig")
 
-vim.g.coq_settings = { auto_start = 'shut-up', completion = { always = false } }
-local coq = require "coq"
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Icons
 vim.lsp.protocol.CompletionItemKind = {
@@ -50,7 +49,7 @@ local lsp_formatting = function(bufnr)
 		async = true,
 		filter = function(client)
 			-- apply whatever logic you want (in this example, we'll only use null-ls)
-			return client.name == "null-ls"
+			return client.name == "null-ls" or client.name == "lua_ls" or client.name == "rust_analyzer"
 		end,
 		bufnr = bufnr,
 	})
@@ -103,20 +102,23 @@ local on_attach = function(client, bufnr)
 		opts)
 end
 
-nvim_lsp.html.setup(coq.lsp_ensure_capabilities { on_attach = on_attach })
-nvim_lsp.cssls.setup(coq.lsp_ensure_capabilities { on_attach = on_attach })
-nvim_lsp.unocss.setup(coq.lsp_ensure_capabilities { on_attach = on_attach })
-nvim_lsp.cssmodules_ls.setup(coq.lsp_ensure_capabilities { on_attach = on_attach })
-nvim_lsp.tsserver.setup(coq.lsp_ensure_capabilities { on_attach = on_attach })
+nvim_lsp.html.setup({ capabilities = capabilities, on_attach = on_attach })
+nvim_lsp.cssls.setup({ capabilties = capabilities, on_attach = on_attach })
+nvim_lsp.unocss.setup({ capabilties = capabilities, on_attach = on_attach })
+nvim_lsp.cssmodules_ls.setup({ capabilties = capabilities, on_attach = on_attach })
+nvim_lsp.tsserver.setup({ capabilties = capabilities, on_attach = on_attach })
 
-nvim_lsp.lua_ls.setup(coq.lsp_ensure_capabilities {
-	on_attach = on_attach, settings = {
-	Lua = { diagnostics = { globals = { "vim", "use" } } } }
+nvim_lsp.lua_ls.setup({
+	capabilties = capabilities,
+	on_attach = on_attach,
+	settings = {
+		Lua = { diagnostics = { globals = { "vim", "use" } } } }
 })
 
-nvim_lsp.pyright.setup(coq.lsp_ensure_capabilities { on_attach = on_attach })
+nvim_lsp.pyright.setup({ capabilties = capabilities, on_attach = on_attach })
 
-nvim_lsp.rust_analyzer.setup(coq.lsp_ensure_capabilities {
+nvim_lsp.rust_analyzer.setup({
+	capabilties = capabilities,
 	on_attach = on_attach,
 	-- settings = { ["rust-analyzer"] = { checkOnSave = { command = "clippy" } } }k
 	--         checkOnSave = {
@@ -130,8 +132,8 @@ nvim_lsp.rust_analyzer.setup(coq.lsp_ensure_capabilities {
 	-- }
 })
 
-nvim_lsp.clangd.setup(coq.lsp_ensure_capabilities { on_attach = on_attach })
-nvim_lsp.gdscript.setup(coq.lsp_ensure_capabilities { on_attach = on_attach })
-nvim_lsp.sqlls.setup(coq.lsp_ensure_capabilities { on_attach = on_attach })
-nvim_lsp.dockerls.setup(coq.lsp_ensure_capabilities { on_attach = on_attach })
-nvim_lsp.wgsl_analyzer.setup(coq.lsp_ensure_capabilities { on_attach = on_attach })
+nvim_lsp.clangd.setup({ capabilties = capabilities, on_attach = on_attach })
+nvim_lsp.gdscript.setup({ capabilties = capabilities, on_attach = on_attach })
+nvim_lsp.sqlls.setup({ capabilties = capabilities, on_attach = on_attach })
+nvim_lsp.dockerls.setup({ capabilties = capabilities, on_attach = on_attach })
+nvim_lsp.wgsl_analyzer.setup({ capabilties = capabilities, on_attach = on_attach })

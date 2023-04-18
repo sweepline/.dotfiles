@@ -24,8 +24,15 @@ return require("packer").startup(function()
 	use { 'mfussenegger/nvim-dap' }
 
 	-- Autocomplete
-	use { 'ms-jpq/coq_nvim', branch = 'coq' }
-	use { 'ms-jpq/coq.artifacts', branch = 'artifacts' }
+	use {
+		'hrsh7th/cmp-nvim-lsp',
+		'hrsh7th/cmp-buffer',
+		'hrsh7th/cmp-path',
+		'hrsh7th/cmp-cmdline',
+		'hrsh7th/nvim-cmp',
+		'hrsh7th/cmp-vsnip',
+		'hrsh7th/vim-vsnip',
+	}
 
 	-- Lint and formatting
 	use { "jose-elias-alvarez/null-ls.nvim",
