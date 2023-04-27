@@ -56,13 +56,12 @@ output 'Dell Inc. DELL U2715H GH85D5AH00TL' resolution 2560x1440 position 2560,0
 # resumed. It will also lock your screen before your computer goes to sleep.
 
 set $lockscreen swaylock
-set $lockscreen_lock_after  300
-set $lockscreen_turnoff_after  20
+set $lockscreen_lock_after  600
+set $lockscreen_turnoff_after  1500
 
 exec swayidle -w \
 	timeout $lockscreen_lock_after '$lockscreen' \
-	timeout $lockscreen_turnoff_after 'if pgrep swaylock; then swaymsg "output * dpms off"; fi' \
-	resume 'swaymsg "output * dpms on"' \
+	timeout $lockscreen_turnoff_after 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
 	before-sleep '$lockscreen' \
 	before-sleep 'playerctl pause'
 
