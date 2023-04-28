@@ -252,6 +252,7 @@ bindsym XF86MonBrightnessUp exec brightnessctl s 10%+
 # capture the specified screen area to clipboard    
 set $grimshot exec /usr/share/sway/scripts/grimshot --notify copy area
 bindsym $mod+Shift+S $grimshot
+bindsym $mod+Shift+R exec ~/.config/sway/screen-record.sh
 bindsym Print $grimshot
 
 
