@@ -31,8 +31,10 @@ set $menu rofi -show run
 
 ### Output configuration
 #
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg ~/Pictures/wallpapers/simple1.jpg fill
+# Wallpaper
+output 'Dell Inc. DELL U2715H GH85D5A40LYS' bg ~/Pictures/ice_mountain.jpg fill
+output 'Dell Inc. DELL U2715H GH85D5AH00TL' bg ~/Pictures/lake.jpg fill
+
 #
 # Example configuration:
 #
