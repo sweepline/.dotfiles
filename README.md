@@ -8,3 +8,47 @@ Files are managed with `stow`, just `stow nvim` to symlink the nvim config.
 
 Disable the power key on your HHKB by changing `/etc/systemd/logind.conf`
 to `HandlePowerKey=ignore`.
+
+Flickering or white screen on amdgpu? Try kernel param `amdgpu.sg_display=0`.
+
+## Package list
+
+```
+bpython
+fscrypt
+fzf
+git
+grimshot
+mako
+mpv
+ncspot
+neovim
+noto-fonts-cjk
+noto-fonts-emoji
+noto-fonts-extra
+otf-font-awesome
+reflector
+ripgrep
+rofi
+rustup
+signal-desktop
+spotify
+stow
+sway
+swaybg
+swayidle
+swayimg
+swaylock
+ttc-iosevka
+ttc-iosevka-aile
+ttc-iosevka-etoile
+ttc-iosevka-slab
+waybar
+wezterm
+wf-recorder
+wl-clipboard
+xdg-desktop-portal
+xdg-user-dirs
+xorg-xwayland
+yay
+```

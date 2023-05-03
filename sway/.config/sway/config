@@ -87,6 +87,11 @@ seat * hide_cursor when-typing enable
 
 ## Firefox crashes if using an input field that matches on multiple keyboards
 
+input "2652:34050:FC900RBT_Keyboard" {
+    xkb_options compose:ralt
+	xkb_numlock enable
+}
+
 input "1:1:AT_Translated_Set_2_keyboard" {
     xkb_options ctrl:nocaps,compose:ralt,altwin:swap_alt_win
 	xkb_numlock enable
