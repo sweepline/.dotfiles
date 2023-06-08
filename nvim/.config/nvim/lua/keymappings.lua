@@ -8,7 +8,6 @@ end
 -- Some completion keymaps in `completion.lua`
 
 map("n", "<C-l>", "<cmd>noh<CR>") -- Clear Highlights
-map("i", "jk", "<Esc>")           -- jk to escape
 
 map("n", "<C-p>", "<cmd>Telescope find_files<CR>")
 map("n", "<Leader>ff", "<cmd>Telescope find_files<CR>")
