@@ -8,7 +8,7 @@ return require("packer").startup(function()
 
 	-- Popup window for file search and stuff
 	use {
-		"nvim-telescope/telescope.nvim",
+		"nvim-telescope/telescope.nvim", tag = "0.1.2",
 		requires = { { "nvim-lua/plenary.nvim" }, { "kyazdani42/nvim-web-devicons" } }
 	}
 	use { "nvim-telescope/telescope-ui-select.nvim" }
