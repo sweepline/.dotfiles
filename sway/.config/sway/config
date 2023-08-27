@@ -113,7 +113,7 @@ input "1267:12693:ELAN0678:00_04F3:3195_Touchpad" {
 # Godot windows float
 for_window [class="Godot"] floating enable
 # But not the main one
-for_window [class="Godot" title="Godot Engine"] floating disabl1
+for_window [class="Godot" title="Godot Engine"] floating disable
 # Godot game windows float too
 for_window [instance="Godot_Engine"] floating enable
 

@@ -3,6 +3,7 @@ require("mason-lspconfig").setup()
 local nvim_lsp = require("lspconfig")
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- Icons
 vim.lsp.protocol.CompletionItemKind = {
@@ -103,22 +104,22 @@ local on_attach = function(client, bufnr)
 end
 
 nvim_lsp.html.setup({ capabilities = capabilities, on_attach = on_attach })
-nvim_lsp.cssls.setup({ capabilties = capabilities, on_attach = on_attach })
-nvim_lsp.unocss.setup({ capabilties = capabilities, on_attach = on_attach })
-nvim_lsp.cssmodules_ls.setup({ capabilties = capabilities, on_attach = on_attach })
-nvim_lsp.tsserver.setup({ capabilties = capabilities, on_attach = on_attach })
+nvim_lsp.cssls.setup({ capabilities = capabilities, on_attach = on_attach })
+nvim_lsp.unocss.setup({ capabilities = capabilities, on_attach = on_attach })
+nvim_lsp.cssmodules_ls.setup({ capabilities = capabilities, on_attach = on_attach })
+nvim_lsp.tsserver.setup({ capabilities = capabilities, on_attach = on_attach })
 
 nvim_lsp.lua_ls.setup({
-	capabilties = capabilities,
+	capabilities = capabilities,
 	on_attach = on_attach,
 	settings = {
 		Lua = { diagnostics = { globals = { "vim", "use" } } } }
 })
 
-nvim_lsp.pyright.setup({ capabilties = capabilities, on_attach = on_attach })
+nvim_lsp.pyright.setup({ capabilities = capabilities, on_attach = on_attach })
 
 nvim_lsp.rust_analyzer.setup({
-	capabilties = capabilities,
+	capabilities = capabilities,
 	on_attach = on_attach,
 	-- settings = { ["rust-analyzer"] = { checkOnSave = { command = "clippy" } } }k
 	--         checkOnSave = {
@@ -132,8 +133,8 @@ nvim_lsp.rust_analyzer.setup({
 	-- }
 })
 
-nvim_lsp.clangd.setup({ capabilties = capabilities, on_attach = on_attach })
-nvim_lsp.gdscript.setup({ capabilties = capabilities, on_attach = on_attach })
-nvim_lsp.sqlls.setup({ capabilties = capabilities, on_attach = on_attach })
-nvim_lsp.dockerls.setup({ capabilties = capabilities, on_attach = on_attach })
-nvim_lsp.wgsl_analyzer.setup({ capabilties = capabilities, on_attach = on_attach })
+nvim_lsp.clangd.setup({ capabilities = capabilities, on_attach = on_attach })
+nvim_lsp.gdscript.setup({ capabilities = capabilities, on_attach = on_attach })
+nvim_lsp.sqlls.setup({ capabilities = capabilities, on_attach = on_attach })
+nvim_lsp.dockerls.setup({ capabilities = capabilities, on_attach = on_attach })
+nvim_lsp.wgsl_analyzer.setup({ capabilities = capabilities, on_attach = on_attach })
