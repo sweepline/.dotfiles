@@ -2,12 +2,15 @@ local putils = require("telescope.previewers.utils")
 
 require('telescope').setup {
 	defaults = {
-		-- buffer_previewer_maker = new_maker,
 		layout_strategy = "flex",
 		layout_config = {},
-		-- sorting_strategies = "descending"
 		path_display = { "smart" },
-		-- wrap_results = false
+		dynamic_preview_title = true,
+		mappings = {
+			n = {
+				['<c-d>'] = require('telescope.actions').delete_buffer,
+			},
+		},
 		preview = {
 			filetype_hook = function(filepath, bufnr, opts)
 				-- you could analogously check opts.ft for filetypes
