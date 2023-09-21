@@ -2,7 +2,7 @@ local putils = require("telescope.previewers.utils")
 
 require('telescope').setup {
 	defaults = {
-		layout_strategy = "flex",
+		layout_strategy = "vertical",
 		layout_config = {},
 		path_display = { "smart" },
 		dynamic_preview_title = true,

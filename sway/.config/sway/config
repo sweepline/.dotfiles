@@ -32,8 +32,8 @@ set $menu rofi -show run
 ### Output configuration
 #
 # Wallpaper
-#output 'Dell Inc. DELL U2715H GH85D5A40LYS' bg ~/Pictures/ice_mountain.jpg fill
-#output 'Dell Inc. DELL U2715H GH85D5AH00TL' bg ~/Pictures/lake.jpg fill
+output 'Dell Inc. DELL U2715H GH85D5A40LYS' bg ~/Pictures/sea.jpg fill
+output 'Dell Inc. DELL U2715H GH85D5AH00TL' bg ~/Pictures/flower.jpg fill
 
 #
 # Example configuration:
@@ -41,8 +41,8 @@ set $menu rofi -show run
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
-#output 'Dell Inc. DELL U2715H GH85D5A40LYS' resolution 2560x1440 position 0,0
-#output 'Dell Inc. DELL U2715H GH85D5AH00TL' resolution 2560x1440 position 2560,0 transform 0
+output 'Dell Inc. DELL U2715H GH85D5A40LYS' resolution 2560x1440 position 0,0
+output 'Dell Inc. DELL U2715H GH85D5AH00TL' resolution 2560x1440 position 2560,-280 transform 270
 
 ### Idle configuration
 #
@@ -57,17 +57,21 @@ set $menu rofi -show run
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
 
-set $lockscreen swaylock
-set $lockscreen_lock_after  600
-set $lockscreen_turnoff_after  1500
+
+set $lockscreen_turnoff_delay  30
+set $lockscreen_lock_after 600
+# We cant do arithmetic in sway configs, so put the summation here.
+set $lockscreen_turnoff_after 630
+set $lock_command playerctl -a pause & swaylock
 
 exec swayidle -w \
-	timeout $lockscreen_lock_after '$lockscreen' \
-	timeout $lockscreen_turnoff_after 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-	before-sleep '$lockscreen' \
-	before-sleep 'playerctl pause'
+	timeout $lockscreen_lock_after 'if ! pgrep swaylock; then $lock_command; fi' \
+	timeout $lockscreen_turnoff_after 'swaymsg "output * power off"' \
+	timeout $lockscreen_turnoff_delay 'if pgrep swaylock; then swaymsg "output * power off"; fi' \
+	resume 'swaymsg "output * power on"' \
+	before-sleep '$lock_command'
 
-bindsym $mod+Shift+w exec '$lockscreen'
+bindsym $mod+Shift+w exec '$lock_command'
 
 seat * hide_cursor when-typing enable
 
@@ -88,6 +92,11 @@ seat * hide_cursor when-typing enable
 ## Firefox crashes if using an input field that matches on multiple keyboards
 
 input "2652:34050:FC900RBT_Keyboard" {
+    xkb_options compose:ralt
+	xkb_numlock enable
+}
+
+input "3141:6668:FC900R" {
     xkb_options compose:ralt
 	xkb_numlock enable
 }
@@ -257,9 +266,9 @@ bindsym $mod+u exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym $mod+i exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym $mod+o exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym $mod+y exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
-bindsym $mod+p exec playerctl play-pause
-bindsym $mod+bracketright exec playerctl next
-bindsym $mod+bracketleft exec playerctl previous
+bindsym $mod+p exec playerctl -a play-pause
+bindsym $mod+bracketright exec playerctl -a next
+bindsym $mod+bracketleft exec playerctl -a previous
 bindsym XF86MonBrightnessDown exec brightnessctl s 10%-
 bindsym XF86MonBrightnessUp exec brightnessctl s 10%+
 
@@ -270,7 +279,8 @@ bindsym $mod+Shift+R exec ~/.config/sway/screen-record.sh
 bindsym Print $grimshot
 
 
-client.focused          $focus        $focus       $focus         $focus	$focus
+# class                 border  	  background   text           indicator child_border
+client.focused          $focus        $focus       $text          $focus	$focus
 client.unfocused        $bg-inactive  $bg-inactive $text-inactive $bar		$bar
 client.focused_inactive $bg-inactive  $bg-inactive $text-inactive $bar		$bar
 client.urgent           $bg-urgent    $bg-urgent   $text          $bar		$bar
@@ -294,9 +304,11 @@ smart_gaps on
 
 set $gnome-schema org.gnome.desktop.interface
 
+# exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
 exec_always {
-    gsettings set $gnome-schema gtk-theme 'Gruvbox-Material-Dark'
-    gsettings set $gnome-schema icon-theme 'Gruvbox-Material-Dark'
+    # gsettings set $gnome-schema gtk-theme 'Gruvbox-Material-Dark'
+    # gsettings set $gnome-schema icon-theme 'Gruvbox-Material-Dark'
     # gsettings set $gnome-schema cursor-theme 'Your cursor Theme'
     gsettings set $gnome-schema font-name 'Iosevka Aile'
 }
