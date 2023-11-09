@@ -45,14 +45,16 @@ vim.api.nvim_set_keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>",
 	opts)
 vim.api.nvim_set_keymap("n", "<space>q",
 	"<cmd>Telescope diagnostics bufnr=0<CR>", opts)
+
 local lsp_formatting = function(bufnr)
 	vim.lsp.buf.format({
-		async = true,
+		async = false,
 		filter = function(client)
 			-- apply whatever logic you want (in this example, we'll only use null-ls)
 			return client.name == "null-ls" or client.name == "lua_ls" or client.name == "rust_analyzer"
 		end,
 		bufnr = bufnr,
+		timeout_ms = 2000,
 	})
 end
 vim.keymap.set("n", "<space><Tab>", lsp_formatting);

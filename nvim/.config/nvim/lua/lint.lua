@@ -8,7 +8,7 @@ null_ls.setup({
 		-- TS
 		null_ls.builtins.code_actions.eslint,
 		null_ls.builtins.diagnostics.eslint,
-		null_ls.builtins.formatting.eslint,
+		-- null_ls.builtins.formatting.eslint,
 		null_ls.builtins.formatting.prettier,
 
 		-- Python
