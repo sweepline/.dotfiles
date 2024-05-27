@@ -1,11 +1,12 @@
 local indent = 4
 
 vim.cmd("filetype plugin indent on")
-vim.opt.expandtab = false
-vim.opt.shiftwidth = indent
-vim.opt.smartindent = true
 vim.opt.tabstop = indent
+vim.opt.shiftwidth = indent
+vim.opt.expandtab = false
+vim.opt.smartindent = true
 vim.opt.shiftround = true
+
 vim.opt.hidden = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true

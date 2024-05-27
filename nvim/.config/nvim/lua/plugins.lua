@@ -10,10 +10,6 @@ return require("lazy").setup({
 		config = true
 	},
 	{
-		"nvimtools/none-ls.nvim",
-		dependencies = { "nvim-lua/plenary.nvim" }
-	},
-	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 	},
@@ -65,6 +61,7 @@ return require("lazy").setup({
 		dependencies = { "kyazdani42/nvim-web-devicons" }
 	},
 	"tpope/vim-fugitive",
+	"tpope/vim-sleuth",
 
 	-- Color schemes
 	"sainnhe/gruvbox-material",

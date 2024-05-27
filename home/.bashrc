@@ -7,6 +7,7 @@
 # PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 unset HISTFILESIZE
 HISTSIZE=10000
+HISTCONTROL=ignorespace
 PROMPT_COMMAND="history -a"
 export HISTSIZE PROMPT_COMMAND
 shopt -s histappend
@@ -47,6 +48,7 @@ alias mvi="mv -iv"
 alias cpi="cp -riv"
 alias mkdiri="mkdir -vp"
 alias rmi="rm -v"
+
 ART="
 *%#*###**##+++======+++++++============+++++++++++++++++++*************\n\
 *##########+========+***+**#*++============++++++*+++++++++++++++++++**\n\

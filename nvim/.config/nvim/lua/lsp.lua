@@ -49,10 +49,11 @@ vim.api.nvim_set_keymap("n", "<space>q",
 local lsp_formatting = function(bufnr)
 	vim.lsp.buf.format({
 		async = false,
-		filter = function(client)
-			-- apply whatever logic you want (in this example, we'll only use null-ls)
-			return client.name == "null-ls" or client.name == "lua_ls" or client.name == "rust_analyzer"
-		end,
+		-- filter = function(client)
+		-- 	-- apply whatever logic you want (in this example, we'll only use null-ls)
+		-- 	return client.name == "biome" or client.name == "null-ls" or client.name == "lua_ls" or
+		-- 		client.name == "rust_analyzer"
+		-- end,
 		bufnr = bufnr,
 		timeout_ms = 2000,
 	})
@@ -106,10 +107,17 @@ local on_attach = function(client, bufnr)
 end
 
 nvim_lsp.html.setup({ capabilities = capabilities, on_attach = on_attach })
-nvim_lsp.cssls.setup({ capabilities = capabilities, on_attach = on_attach })
-nvim_lsp.unocss.setup({ capabilities = capabilities, on_attach = on_attach })
 nvim_lsp.cssmodules_ls.setup({ capabilities = capabilities, on_attach = on_attach })
 nvim_lsp.tsserver.setup({ capabilities = capabilities, on_attach = on_attach })
+
+nvim_lsp.eslint.setup({ capabilities = capabilities, on_attach = on_attach })
+nvim_lsp.stylelint_lsp.setup({ capabilities = capabilities, on_attach = on_attach })
+nvim_lsp.biome.setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+	root_dir = nvim_lsp.util.root_pattern("biome.json",
+		"biome.jsonc"),
+})
 
 nvim_lsp.lua_ls.setup({
 	capabilities = capabilities,
