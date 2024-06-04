@@ -5,6 +5,16 @@ local nvim_lsp = require("lspconfig")
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
+-- Show which linter is reporting the error.
+vim.diagnostic.config({
+	virtual_text = {
+		source = "always", -- Or "if_many"
+	},
+	float = {
+		source = "always", -- Or "if_many"
+	},
+})
+
 -- Icons
 vim.lsp.protocol.CompletionItemKind = {
 	"", -- Text
@@ -49,11 +59,11 @@ vim.api.nvim_set_keymap("n", "<space>q",
 local lsp_formatting = function(bufnr)
 	vim.lsp.buf.format({
 		async = false,
-		-- filter = function(client)
-		-- 	-- apply whatever logic you want (in this example, we'll only use null-ls)
-		-- 	return client.name == "biome" or client.name == "null-ls" or client.name == "lua_ls" or
-		-- 		client.name == "rust_analyzer"
-		-- end,
+		filter = function(client)
+			-- apply whatever logic you want (in this example, we'll only use null-ls)
+			return client.name == "biome" or client.name == "null-ls" or client.name == "lua_ls" or
+				client.name == "rust_analyzer"
+		end,
 		bufnr = bufnr,
 		timeout_ms = 2000,
 	})
@@ -107,11 +117,16 @@ local on_attach = function(client, bufnr)
 end
 
 nvim_lsp.html.setup({ capabilities = capabilities, on_attach = on_attach })
+nvim_lsp.cssls.setup({ capabilities = capabilities, on_attach = on_attach })
 nvim_lsp.cssmodules_ls.setup({ capabilities = capabilities, on_attach = on_attach })
 nvim_lsp.tsserver.setup({ capabilities = capabilities, on_attach = on_attach })
 
 nvim_lsp.eslint.setup({ capabilities = capabilities, on_attach = on_attach })
-nvim_lsp.stylelint_lsp.setup({ capabilities = capabilities, on_attach = on_attach })
+nvim_lsp.stylelint_lsp.setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+	filetypes = { "css", "less", "scss", "sugarss", "vue", "wxss" }
+})
 nvim_lsp.biome.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,

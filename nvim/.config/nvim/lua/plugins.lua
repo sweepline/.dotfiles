@@ -4,10 +4,10 @@ return require("lazy").setup({
 		dependencies = {
 			"nvim-lua/plenary.nvim", -- required
 			"sindrets/diffview.nvim", -- optional - Diff integration
-
 			"nvim-telescope/telescope.nvim", -- optional
 		},
-		config = true
+		config = true,
+		cmd = "Neogit"
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
