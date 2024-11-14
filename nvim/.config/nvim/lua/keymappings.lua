@@ -43,3 +43,9 @@ vim.api.nvim_create_user_command("DiagnosticToggle", function()
 		signs = not vt,
 	}
 end, { desc = "toggle diagnostic" })
+
+-- Use vim-dispatch or something to not have the buffer hang while we wait for execution.
+-- The extra <CR> in the end is to skip the press enter to continue dialog.
+vim.cmd("autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python' shellescape(@%, 1)<CR><CR>")
+vim.cmd("autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python' shellescape(@%, 1)<CR><CR>")
+
