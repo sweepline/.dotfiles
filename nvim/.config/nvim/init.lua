@@ -29,3 +29,16 @@ require("treesitter")
 require("search")
 
 require("nvim_comment").setup()
+
+if vim.g.neovide then
+  vim.o.guifont = "Iosevka Fixed Slab:h14"
+  vim.g.neovide_padding_top = 8
+  vim.g.neovide_padding_bottom = 8
+  vim.g.neovide_padding_right = 8
+  vim.g.neovide_padding_left = 8
+  vim.g.neovide_confirm_quit = true
+  vim.g.neovide_cursor_animation_length = 0.10
+  vim.g.neovide_cursor_trail_size = 0.3
+  vim.g.neovide_cursor_antialiasing = true
+  vim.g.neovide_cursor_animate_in_insert_mode = true
+end

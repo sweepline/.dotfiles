@@ -62,18 +62,16 @@ local lsp_formatting = function(bufnr)
 		filter = function(client)
 			-- apply whatever logic you want (in this example, we'll only use null-ls)
 			return client.name == "biome" or client.name == "null-ls" or client.name == "lua_ls" or
-				client.name == "rust_analyzer"
+				client.name == "rust_analyzer" or client.name == "ruff"
 		end,
 		bufnr = bufnr,
 		timeout_ms = 2000,
 	})
 end
 vim.keymap.set("n", "<space><Tab>", lsp_formatting);
--- vim.api.nvim_set_keymap("n", "<space><Tab>",
---	"<cmd>lua vim.lsp.buf.format { async = true }<CR>", opts)
-
 
 -- Your custom attach function for nvim-lspconfig goes here.
+---@diagnostic disable-next-line: unused-local
 local on_attach = function(client, bufnr)
 	vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 	-- Mappings.
@@ -116,10 +114,11 @@ local on_attach = function(client, bufnr)
 		opts)
 end
 
+-- HTML/CSS/JS/TS/JSX/TSX
 nvim_lsp.html.setup({ capabilities = capabilities, on_attach = on_attach })
 nvim_lsp.cssls.setup({ capabilities = capabilities, on_attach = on_attach })
 nvim_lsp.cssmodules_ls.setup({ capabilities = capabilities, on_attach = on_attach })
-nvim_lsp.tsserver.setup({ capabilities = capabilities, on_attach = on_attach })
+nvim_lsp.ts_ls.setup({ capabilities = capabilities, on_attach = on_attach })
 
 nvim_lsp.eslint.setup({ capabilities = capabilities, on_attach = on_attach })
 nvim_lsp.stylelint_lsp.setup({
@@ -134,16 +133,11 @@ nvim_lsp.biome.setup({
 		"biome.jsonc"),
 })
 
-nvim_lsp.lua_ls.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
-	settings = {
-		Lua = { diagnostics = { globals = { "vim", "use" } } } }
-})
+-- Python
+nvim_lsp.jedi_language_server.setup({ capabilities = capabilities, on_attach = on_attach })
+nvim_lsp.ruff.setup({ capabilities = capabilities, on_attach = on_attach })
 
-nvim_lsp.pyright.setup({ capabilities = capabilities, on_attach = on_attach })
-nvim_lsp.ruff_lsp.setup({ capabilities = capabilities, on_attach = on_attach })
-
+-- Rust
 nvim_lsp.rust_analyzer.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
@@ -159,8 +153,16 @@ nvim_lsp.rust_analyzer.setup({
 	-- }
 })
 
+-- Other
+nvim_lsp.lua_ls.setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+	settings = {
+		Lua = { diagnostics = { globals = { "vim", "use" } } } }
+})
 nvim_lsp.clangd.setup({ capabilities = capabilities, on_attach = on_attach })
 nvim_lsp.gdscript.setup({ capabilities = capabilities, on_attach = on_attach })
 nvim_lsp.sqlls.setup({ capabilities = capabilities, on_attach = on_attach })
 nvim_lsp.dockerls.setup({ capabilities = capabilities, on_attach = on_attach })
+nvim_lsp.docker_compose_language_service.setup({ capabilities = capabilities, on_attach = on_attach })
 nvim_lsp.wgsl_analyzer.setup({ capabilities = capabilities, on_attach = on_attach })

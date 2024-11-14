@@ -32,8 +32,8 @@ set $menu rofi -show run
 ### Output configuration
 #
 # Wallpaper
-output 'Dell Inc. DELL U2715H GH85D5A40LYS' bg ~/Pictures/sea.jpg fill
-output 'Dell Inc. DELL U2715H GH85D5AH00TL' bg ~/Pictures/flower.jpg fill
+output 'Dell Inc. DELL U2717D J0XYN989DC7S' bg ~/Pictures/sea.jpg fill
+output 'Dell Inc. DELL U2717D J0XYN989DC8S' bg ~/Pictures/flower.jpg fill
 
 #
 # Example configuration:
@@ -41,8 +41,8 @@ output 'Dell Inc. DELL U2715H GH85D5AH00TL' bg ~/Pictures/flower.jpg fill
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
-output 'Dell Inc. DELL U2715H GH85D5A40LYS' resolution 2560x1440 position 0,0
-output 'Dell Inc. DELL U2715H GH85D5AH00TL' resolution 2560x1440 position 2560,-280 transform 270
+output 'Dell Inc. DELL U2717D J0XYN989DC7S' resolution 2560x1440 position 0,0
+output 'Dell Inc. DELL U2717D J0XYN989DC8S' resolution 2560x1440 position 2560,-280 transform 270
 
 ### Idle configuration
 #
@@ -125,6 +125,7 @@ for_window [class="Godot"] floating enable
 for_window [class="Godot" title="Godot Engine"] floating disable
 # Godot game windows float too
 for_window [instance="Godot_Engine"] floating enable
+for_window [instance="mtgo.exe"] floating enable
 
 ### Key bindings
 #
