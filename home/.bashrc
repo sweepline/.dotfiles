@@ -48,6 +48,8 @@ alias mvi="mv -iv"
 alias cpi="cp -riv"
 alias mkdiri="mkdir -vp"
 alias rmi="rm -v"
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
 
 ART="
 *%#*###**##+++======+++++++============+++++++++++++++++++*************\n\
