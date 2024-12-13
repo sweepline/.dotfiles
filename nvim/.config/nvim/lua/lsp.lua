@@ -166,3 +166,14 @@ nvim_lsp.sqlls.setup({ capabilities = capabilities, on_attach = on_attach })
 nvim_lsp.dockerls.setup({ capabilities = capabilities, on_attach = on_attach })
 nvim_lsp.docker_compose_language_service.setup({ capabilities = capabilities, on_attach = on_attach })
 nvim_lsp.wgsl_analyzer.setup({ capabilities = capabilities, on_attach = on_attach })
+
+-- Fixes some crap in rust-analyzer see: https://github.com/neovim/neovim/issues/30985
+for _, method in ipairs({ 'textDocument/diagnostic', 'workspace/diagnostic' }) do
+    local default_diagnostic_handler = vim.lsp.handlers[method]
+    vim.lsp.handlers[method] = function(err, result, context, config)
+        if err ~= nil and err.code == -32802 then
+            return
+        end
+        return default_diagnostic_handler(err, result, context, config)
+    end
+end

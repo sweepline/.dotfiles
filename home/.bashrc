@@ -41,6 +41,7 @@ alias localstack="$HOME/repos/mono/scripts/localstack.py"
 export SCCACHE_REDIS=redis://esa
 alias pyscadmin="ssh -t ws6 pyscadmin"
 alias ssh-wadd="sadmin auth; ssh-add"
+alias vncstart="wayvnc -o DP-5 -g 0.0.0.0"
 
 # Qute aliases
 alias bp="bpython"

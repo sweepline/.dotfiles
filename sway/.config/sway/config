@@ -117,16 +117,6 @@ input "1267:12693:ELAN0678:00_04F3:3195_Touchpad" {
 	dwt enabled
 }
 
-### Window rules
-
-# Godot windows float
-for_window [class="Godot"] floating enable
-# But not the main one
-for_window [class="Godot" title="Godot Engine"] floating disable
-# Godot game windows float too
-for_window [instance="Godot_Engine"] floating enable
-for_window [instance="mtgo.exe"] floating enable
-
 ### Key bindings
 #
 # Basics:
@@ -315,5 +305,26 @@ exec_always {
     gsettings set $gnome-schema color-scheme 'prefer-dark'
 }
 
+### Window rules
+
+# Godot windows float
+for_window [class="Godot"] floating enable
+# But not the main one
+for_window [class="Godot" title="Godot Engine"] floating disable
+# Godot game windows float too
+for_window [instance="Godot_Engine"] floating enable
+for_window [instance="mtgo.exe"] floating enable
+
+assign [instance="joplin"] 5
+assign [instance="signal"] 5
+assign [instance="spotify"] 5
+# assign [app_id="firefox"] 3
+
+### Startup programs
+
+exec {
+    swaymsg workspace 1
+    wezterm start --cwd ~/repos/mono/webmap
+}
 
 include /etc/sway/config.d/*
