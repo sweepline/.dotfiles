@@ -19,6 +19,6 @@ require("rose-pine").setup({
 })
 
 vim.opt.termguicolors = true
-vim.opt.background = "light"
+vim.opt.background = "dark"
 -- vim.cmd("colorscheme rose-pine")
 vim.cmd("colorscheme gruvbox-material")

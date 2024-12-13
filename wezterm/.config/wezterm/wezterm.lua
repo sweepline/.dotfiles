@@ -16,7 +16,7 @@ end
 config.font = wezterm.font "Iosevka Fixed Slab"
 config.font_size = 14
 config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
-config.color_scheme = 'Gruvbox Light'
+config.color_scheme = 'Gruvbox Material (Gogh)'
 config.enable_tab_bar = false
 --config.disable_default_key_bindings = true
 

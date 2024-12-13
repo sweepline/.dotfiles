@@ -51,4 +51,6 @@ xdg-desktop-portal
 xdg-user-dirs
 xorg-xwayland
 yay
+gruvbox-material-gtk-theme-git
+gruvbox-material-icon-theme-git
 ```
