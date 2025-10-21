@@ -1,6 +1,5 @@
 require("mason").setup()
 require("mason-lspconfig").setup()
-local nvim_lsp = require("lspconfig")
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -114,66 +113,53 @@ local on_attach = function(client, bufnr)
 		opts)
 end
 
--- HTML/CSS/JS/TS/JSX/TSX
-nvim_lsp.html.setup({ capabilities = capabilities, on_attach = on_attach })
-nvim_lsp.cssls.setup({ capabilities = capabilities, on_attach = on_attach })
-nvim_lsp.cssmodules_ls.setup({ capabilities = capabilities, on_attach = on_attach })
-nvim_lsp.ts_ls.setup({ capabilities = capabilities, on_attach = on_attach })
-
-nvim_lsp.eslint.setup({ capabilities = capabilities, on_attach = on_attach })
-nvim_lsp.stylelint_lsp.setup({
+vim.lsp.config("*", {
 	capabilities = capabilities,
 	on_attach = on_attach,
+})
+
+-- HTML/CSS/JS/TS/JSX/TSX
+vim.lsp.enable("html")
+vim.lsp.enable("cssls")
+vim.lsp.enable("cssmodules_ls")
+vim.lsp.enable("ts_ls")
+vim.lsp.enable("eslint")
+vim.lsp.config("stylelint_lsp", {
 	filetypes = { "css", "less", "scss", "sugarss", "vue", "wxss" }
 })
-nvim_lsp.biome.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
-	root_dir = nvim_lsp.util.root_pattern("biome.json",
-		"biome.jsonc"),
-})
+vim.lsp.enable("stylelint_lsp")
+vim.lsp.enable("biome")
 
 -- Python
-nvim_lsp.jedi_language_server.setup({ capabilities = capabilities, on_attach = on_attach })
-nvim_lsp.ruff.setup({ capabilities = capabilities, on_attach = on_attach })
+vim.lsp.enable("jedi_language_server")
+vim.lsp.enable("ruff")
 
 -- Rust
-nvim_lsp.rust_analyzer.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
-	-- settings = { ["rust-analyzer"] = { checkOnSave = { command = "clippy" } } }k
-	--         checkOnSave = {
-	--             allFeatures = true,
-	--             overrideCommand = {
-	--                 "cargo", "clippy", "--workspace", "--message-format=json",
-	--                 "--all-targets", "--all-features"
-	--             }
-	--         }
-	--     }
-	-- }
-})
+vim.lsp.enable("rust_analyzer")
 
 -- Other
-nvim_lsp.lua_ls.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
+vim.lsp.config("lua_ls", {
 	settings = {
 		Lua = { diagnostics = { globals = { "vim", "use" } } } }
 })
-nvim_lsp.clangd.setup({ capabilities = capabilities, on_attach = on_attach })
-nvim_lsp.gdscript.setup({ capabilities = capabilities, on_attach = on_attach })
-nvim_lsp.sqlls.setup({ capabilities = capabilities, on_attach = on_attach })
-nvim_lsp.dockerls.setup({ capabilities = capabilities, on_attach = on_attach })
-nvim_lsp.docker_compose_language_service.setup({ capabilities = capabilities, on_attach = on_attach })
-nvim_lsp.wgsl_analyzer.setup({ capabilities = capabilities, on_attach = on_attach })
+vim.lsp.enable("clangd", {
+	settings = {
+		offsetEncoding = "utf-16",
+	}
+})
+vim.lsp.enable("gdscript")
+vim.lsp.enable("sqlls")
+vim.lsp.enable("dockerls")
+vim.lsp.enable("docker_compose_language_service")
+vim.lsp.enable("wgsl_analyzer")
 
 -- Fixes some crap in rust-analyzer see: https://github.com/neovim/neovim/issues/30985
 for _, method in ipairs({ 'textDocument/diagnostic', 'workspace/diagnostic' }) do
-    local default_diagnostic_handler = vim.lsp.handlers[method]
-    vim.lsp.handlers[method] = function(err, result, context, config)
-        if err ~= nil and err.code == -32802 then
-            return
-        end
-        return default_diagnostic_handler(err, result, context, config)
-    end
+	local default_diagnostic_handler = vim.lsp.handlers[method]
+	vim.lsp.handlers[method] = function(err, result, context, config)
+		if err ~= nil and err.code == -32802 then
+			return
+		end
+		return default_diagnostic_handler(err, result, context, config)
+	end
 end

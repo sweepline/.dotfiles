@@ -38,7 +38,6 @@ require('telescope').setup {
 		live_grep = {
 			layout_strategy = "vertical",
 		},
-
 	},
 	extensions = {
 		["ui-select"] = {

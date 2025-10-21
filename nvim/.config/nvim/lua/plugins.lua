@@ -1,5 +1,11 @@
 return require("lazy").setup({
 	{
+		"m4xshen/hardtime.nvim",
+		lazy = false,
+		dependencies = { "MunifTanjim/nui.nvim" },
+		opts = {},
+	},
+	{
 		"NeogitOrg/neogit",
 		dependencies = {
 			"nvim-lua/plenary.nvim", -- required
@@ -15,7 +21,6 @@ return require("lazy").setup({
 	},
 	{
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.4",
 		dependencies = {
 			"nvim-lua/plenary.nvim", "kyazdani42/nvim-web-devicons"
 		}
@@ -37,7 +42,7 @@ return require("lazy").setup({
 	},
 	{
 		'saecki/crates.nvim',
-		tag = 'v0.4.0',
+		tag = 'stable',
 		dependencies = { 'nvim-lua/plenary.nvim' },
 		config = function()
 			require('crates').setup()

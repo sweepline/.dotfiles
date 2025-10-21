@@ -96,30 +96,39 @@ seat * hide_cursor when-typing enable
 
 ## Firefox crashes if using an input field that matches on multiple keyboards
 
+input "12851:25361:Ducky_Ducky_One_3_Mini_RGB" {
+    xkb_options ctrl:nocaps,compose:ralt,altwin:swap_alt_win
+}
+
 input "2652:34050:FC900RBT_Keyboard" {
     xkb_options compose:ralt
-	xkb_numlock enable
+    xkb_numlock enable
 }
 
 input "3141:6668:FC900R" {
     xkb_options compose:ralt
-	xkb_numlock enable
+    xkb_numlock enable
 }
 
 input "1:1:AT_Translated_Set_2_keyboard" {
     xkb_options ctrl:nocaps,compose:ralt,altwin:swap_alt_win
-	xkb_numlock enable
+    xkb_numlock enable
 }
 
 input "9456:321:Metadot_-_Das_Keyboard_Das_Keyboard" {
     xkb_options ctrl:nocaps,compose:ralt
-	xkb_numlock enable
+    xkb_numlock enable
+}
+
+input "9456:261:Das_Keyboard_Das_Keyboard_P13" {
+    xkb_options ctrl:nocaps,compose:ralt,altwin:swap_alt_win
+    xkb_numlock enable
 }
 
 input "1267:12693:ELAN0678:00_04F3:3195_Touchpad" {
-	tap enabled
-	natural_scroll enabled
-	dwt enabled
+    tap enabled
+    natural_scroll enabled
+    dwt enabled
 }
 
 ### Key bindings
@@ -134,6 +143,7 @@ bindsym $mod+Shift+q kill
 
 # Start your launcher
 bindsym $mod+d exec $menu
+bindsym $mod+c exec rofi -show calc -modi calc -no-show-match -no-sort
 
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
@@ -320,10 +330,14 @@ for_window [class="Godot" title="Godot Engine"] floating disable
 for_window [instance="Godot_Engine"] floating enable
 for_window [instance="mtgo.exe"] floating enable
 
-assign [instance="joplin"] 5
-assign [instance="signal"] 5
-assign [instance="spotify"] 5
+assign [instance="joplin"] 6
+assign [instance="signal"] 6
+assign [instance="spotify"] 6
+assign [instance="com.github.th_ch.youtube_music"] 6
 # assign [app_id="firefox"] 3
+
+# Single rule for all those file/folder open popups
+for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable, resize set width 1030 height 710
 
 ### Startup programs
 

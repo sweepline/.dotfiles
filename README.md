@@ -29,10 +29,10 @@ noto-fonts-extra
 otf-font-awesome
 reflector
 ripgrep
-rofi
+rofi-wayland
 rustup
 signal-desktop
-spotify
+youtube-music-bin
 stow
 sway
 swaybg

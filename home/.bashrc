@@ -39,8 +39,7 @@ export PATH="$PNPM_HOME:$PATH"
 # Work stuff
 alias localstack="$HOME/repos/mono/scripts/localstack.py"
 export SCCACHE_REDIS=redis://esa
-alias pyscadmin="ssh -t ws6 pyscadmin"
-alias ssh-wadd="sadmin auth; ssh-add"
+alias pyscadmin="ssh -t ws8 pyscadmin"
 alias vncstart="wayvnc -o DP-5 -g 0.0.0.0"
 
 # Qute aliases
@@ -93,3 +92,15 @@ ART="
 -::-*+%@%@%%%%%%#@@@@@@@@@@@@@@@@@@@@@@@@@@#%%@@@%%%@#****+++**#######%\n\
 "
 alias gut='echo -e $ART && echo -e "\"What you lookin at my gut fer?\" - Philadelphia Collins\n" && echo "Did you mean: git"'
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="/home/mikkel/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
