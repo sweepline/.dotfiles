@@ -22,32 +22,37 @@ return require("lazy").setup({
 	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = {
-			"nvim-lua/plenary.nvim", "kyazdani42/nvim-web-devicons"
+			"nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons"
 		}
 	},
 	"nvim-telescope/telescope-ui-select.nvim",
 	"williamboman/mason.nvim",
 	"williamboman/mason-lspconfig.nvim",
 	"neovim/nvim-lspconfig",
+
+	"onsails/lspkind.nvim",
 	'hrsh7th/cmp-nvim-lsp',
 	'hrsh7th/cmp-buffer',
 	'hrsh7th/cmp-path',
-	'hrsh7th/cmp-cmdline',
+	'hrsh7th/cmp-calc',
 	'hrsh7th/nvim-cmp',
 	'hrsh7th/cmp-vsnip',
 	'hrsh7th/vim-vsnip',
 	{
-		'mfussenegger/nvim-dap',
-		lazy = true
+		"David-Kunz/cmp-npm",
+		dependencies = { 'nvim-lua/plenary.nvim' },
+		ft = "json",
+		lazy = true,
 	},
 	{
 		'saecki/crates.nvim',
 		tag = 'stable',
 		dependencies = { 'nvim-lua/plenary.nvim' },
-		config = function()
-			require('crates').setup()
-		end,
 		lazy = true,
+	},
+	{
+		'mfussenegger/nvim-dap',
+		lazy = true
 	},
 	"tikhomirov/vim-glsl",
 	"terrortylor/nvim-comment",
@@ -62,13 +67,23 @@ return require("lazy").setup({
 		end
 	},
 	{
-		"hoob3rt/lualine.nvim",
-		dependencies = { "kyazdani42/nvim-web-devicons" }
+		'nvim-lualine/lualine.nvim',
+		dependencies = { 'nvim-tree/nvim-web-devicons' },
 	},
+	'AndreM222/copilot-lualine',
 	"tpope/vim-fugitive",
 	"tpope/vim-sleuth",
 
 	-- Color schemes
 	"sainnhe/gruvbox-material",
 	"rose-pine/neovim",
+
+	-- Github Copilot
+	{
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+	},
+	{
+		"zbirenbaum/copilot-cmp",
+	}
 })

@@ -8,7 +8,10 @@ lualine.setup {
 		section_separators = "",
 		component_separators = ""
 	},
-	sections = { lualine_c = { { "filename", file_status = true, path = 1 } } }
+	sections = {
+		lualine_c = { { "filename", file_status = true, path = 1 } },
+		lualine_x = { 'copilot', 'encoding', 'fileformat', 'filetype' }, -- copilot added to default
+	}
 }
 
 -- Colorcheme
