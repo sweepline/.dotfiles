@@ -42,6 +42,11 @@ output 'Dell Inc. DELL U2717D J0XYN989DC7S' {
     resolution 2560x1440
     position 0,0
 }
+output 'Dell Inc. DELL U2717D ND7GD846719S' {
+    background ~/Pictures/sea.jpg fill
+    resolution 2560x1440
+    position 0,0
+}
 output 'Dell Inc. DELL U2717D J0XYN989DC8S' {
     background ~/Pictures/flower.jpg fill
     resolution 2560x1440
@@ -102,9 +107,14 @@ input "12851:25361:Ducky_Ducky_One_3_Mini_RGB" {
 
 input "1204:1296:HID_Keyboard_HID_Keyboard" {
     xkb_options ctrl:nocaps,compose:ralt,altwin:swap_alt_win
+    xkb_numlock enable
 }
 
 input "2131:256:Topre_Corporation_HHKB_Professional" {
+    xkb_options compose:ralt
+}
+
+input "2652:34050:FC750RBT_Keyboard" {
     xkb_options compose:ralt
 }
 

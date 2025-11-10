@@ -25,7 +25,8 @@
     //     }
     // },
     "keyboard-state": {
-        "numlock": true,
+		"device-path": "/dev/input/event19", // event19 is my FC750RBT
+        "numlock": false, // FC750RBT does not have numlock
         "capslock": true,
         "format": "{name} {icon}",
         "format-icons": {
@@ -124,6 +125,7 @@
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "interface": "wlan0", // (Optional) To force the use of this interface
         "format-wifi": "{essid} ({signalStrength}%) ",
         "format-ethernet": "{ipaddr}/{cidr} ",
         "tooltip-format": "{ifname} via {gwaddr} ",
