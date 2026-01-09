@@ -135,6 +135,10 @@ vim.lsp.enable("jedi_language_server")
 vim.lsp.enable("ruff")
 
 -- Rust
+vim.lsp.config("rust_analyzer", {
+	capabilities = { general = { positionEncodings = { "utf-16" } } },
+	on_attach = on_attach,
+})
 vim.lsp.enable("rust_analyzer")
 
 -- Other
@@ -154,12 +158,12 @@ vim.lsp.enable("docker_compose_language_service")
 vim.lsp.enable("wgsl_analyzer")
 
 -- Fixes some crap in rust-analyzer see: https://github.com/neovim/neovim/issues/30985
-for _, method in ipairs({ 'textDocument/diagnostic', 'workspace/diagnostic' }) do
-	local default_diagnostic_handler = vim.lsp.handlers[method]
-	vim.lsp.handlers[method] = function(err, result, context, config)
-		if err ~= nil and err.code == -32802 then
-			return
-		end
-		return default_diagnostic_handler(err, result, context, config)
-	end
-end
+-- for _, method in ipairs({ 'textDocument/diagnostic', 'workspace/diagnostic' }) do
+-- 	local default_diagnostic_handler = vim.lsp.handlers[method]
+-- 	vim.lsp.handlers[method] = function(err, result, context, config)
+-- 		if err ~= nil and err.code == -32802 then
+-- 			return
+-- 		end
+-- 		return default_diagnostic_handler(err, result, context, config)
+-- 	end
+-- end
