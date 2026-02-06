@@ -85,6 +85,10 @@ return require("lazy").setup({
 		'nvim-lualine/lualine.nvim',
 		dependencies = { 'nvim-tree/nvim-web-devicons' },
 	},
+	{
+		"SmiteshP/nvim-navic",
+		dependencies = { "neovim/nvim-lspconfig" },
+	},
 	'AndreM222/copilot-lualine',
 	"tpope/vim-fugitive",
 	"tpope/vim-sleuth",

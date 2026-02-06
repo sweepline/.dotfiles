@@ -1,5 +1,6 @@
 require("mason").setup()
 require("mason-lspconfig").setup()
+local navic = require("nvim-navic")
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -43,17 +44,12 @@ vim.lsp.protocol.CompletionItemKind = {
 	"" -- TypeParameter
 }
 
--- Mappings
-local opts = { noremap = true, silent = true }
-
-vim.api.nvim_set_keymap("n", "<space>e",
-	"<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-vim.api.nvim_set_keymap("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>",
-	opts)
-vim.api.nvim_set_keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>",
-	opts)
-vim.api.nvim_set_keymap("n", "<space>q",
-	"<cmd>Telescope diagnostics bufnr=0<CR>", opts)
+-- Global mappings.
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+vim.keymap.set('n', '<space>q', "<cmd>Telescope diagnostics bufnr=0<CR>")
 
 local lsp_formatting = function(bufnr)
 	vim.lsp.buf.format({
@@ -69,53 +65,50 @@ local lsp_formatting = function(bufnr)
 end
 vim.keymap.set("n", "<space><Tab>", lsp_formatting);
 
--- Your custom attach function for nvim-lspconfig goes here.
----@diagnostic disable-next-line: unused-local
-local on_attach = function(client, bufnr)
-	vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-	-- Mappings.
-	-- See `:help vim.lsp.*` for documentation on any of the below functions
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "gd",
-		"<cmd>Telescope lsp_definitions<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "gi",
-		"<cmd>Telescope lsp_implementations<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "gt",
-		"<cmd>Telescope lsp_type_definitions<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "gr",
-		"<cmd>Telescope lsp_references<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "gs",
-		"<cmd>Telescope lsp_document_symbols<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "gS",
-		"<cmd>Telescope lsp_workspace_symbols<CR>", opts)
+vim.api.nvim_create_autocmd('LspAttach', {
+	callback = function(ev)
+		local client = vim.lsp.get_client_by_id(ev.data.client_id)
+		if client.server_capabilities.documentSymbolProvider then
+			navic.attach(client, ev.buf)
+		end
+	end,
+})
 
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-k>",
-		"<cmd>lua vim.lsp.buf.signature_help()<CR>",
-		opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "K",
-		"<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+-- Use LspAttach autocommand to only map the following keys
+-- after the language server attaches to the current buffer
+vim.api.nvim_create_autocmd('LspAttach', {
+	group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+	callback = function(ev)
+		-- Enable completion triggered by <c-x><c-o>
+		vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "<space>rn",
-		"<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "<space>ca",
-		"<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "<space>cr",
-		"<cmd>lua vim.lsp.buf.range_code_action()<CR>",
-		opts)
+		-- Buffer local mappings.
+		-- See `:help vim.lsp.*` for documentation on any of the below functions
+		local opts = { buffer = ev.buf }
+		-- Mappings.
+		-- See `:help vim.lsp.*` for documentation on any of the below functions
+		vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
+		vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
+		vim.keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
+		vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
+		vim.keymap.set("n", "gs", "<cmd>Telescope lsp_document_symbols<CR>", opts)
+		vim.keymap.set("n", "gS", "<cmd>Telescope lsp_workspace_symbols<CR>", opts)
 
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "<space>wa",
-		"<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>",
-		opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "<space>wr",
-		"<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>",
-		opts)
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "<space>wl",
-		"<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
-		opts)
-end
+		vim.keymap.set("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+		vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+
+		vim.keymap.set("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+		vim.keymap.set("n", "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+		vim.keymap.set("n", "<space>cr", "<cmd>lua vim.lsp.buf.range_code_action()<CR>", opts)
+
+		vim.keymap.set("n", "<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
+		vim.keymap.set("n", "<space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
+		vim.keymap.set("n", "<space>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
+	end,
+})
 
 vim.lsp.config("*", {
 	capabilities = capabilities,
-	on_attach = on_attach,
 })
 
 -- HTML/CSS/JS/TS/JSX/TSX
@@ -136,8 +129,7 @@ vim.lsp.enable("ruff")
 
 -- Rust
 vim.lsp.config("rust_analyzer", {
-	capabilities = { general = { positionEncodings = { "utf-16" } } },
-	on_attach = on_attach,
+	capabilities = vim.tbl_extend('force', capabilities, { general = { positionEncodings = { "utf-16" } } }),
 })
 vim.lsp.enable("rust_analyzer")
 
@@ -146,6 +138,7 @@ vim.lsp.config("lua_ls", {
 	settings = {
 		Lua = { diagnostics = { globals = { "vim", "use" } } } }
 })
+vim.lsp.enable("lua_ls")
 vim.lsp.enable("clangd", {
 	settings = {
 		offsetEncoding = "utf-16",
@@ -156,14 +149,3 @@ vim.lsp.enable("sqlls")
 vim.lsp.enable("dockerls")
 vim.lsp.enable("docker_compose_language_service")
 vim.lsp.enable("wgsl_analyzer")
-
--- Fixes some crap in rust-analyzer see: https://github.com/neovim/neovim/issues/30985
--- for _, method in ipairs({ 'textDocument/diagnostic', 'workspace/diagnostic' }) do
--- 	local default_diagnostic_handler = vim.lsp.handlers[method]
--- 	vim.lsp.handlers[method] = function(err, result, context, config)
--- 		if err ~= nil and err.code == -32802 then
--- 			return
--- 		end
--- 		return default_diagnostic_handler(err, result, context, config)
--- 	end
--- end
