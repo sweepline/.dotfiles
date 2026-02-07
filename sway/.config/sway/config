@@ -266,13 +266,6 @@ for_window [app_id="^firefox$" title="^Extension: \(Bitwarden Password Manager\)
 for_window [class=.*] inhibit_idle fullscreen
 for_window [app_id=.*] inhibit_idle fullscreen
 
-for_window [workspace="5"] layout tabbed
-assign [app_id="@joplin/app-desktop"] 5
-assign [app_id="signal"] 5
-assign [app_id="spotify"] 5
-assign [instance="discord"] 5
-assign [instance="com.github.th_ch.youtube_music"] 5
-
 # Single rule for all those file/folder open popups
 for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable, resize set width 1030 height 710
 

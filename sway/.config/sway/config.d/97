@@ -60,6 +60,14 @@ workspace 6 output DP-2
 assign [app_id="firefox"] 3
 assign [class="^steam$"] 2
 
+for_window [workspace="5"] layout tabbed
+assign [app_id="@joplin/app-desktop"] 5
+assign [app_id="signal"] 5
+assign [app_id="spotify"] 5
+assign [instance="discord"] 5
+assign [instance="com.github.th_ch.youtube_music"] 5
+
+
 ### Startup programs
 
 exec {
