@@ -29,6 +29,7 @@ return require("lazy").setup({
 	"nvim-telescope/telescope-ui-select.nvim",
 	"williamboman/mason.nvim",
 	"williamboman/mason-lspconfig.nvim",
+	"WhoIsSethDaniel/mason-tool-installer.nvim",
 	"neovim/nvim-lspconfig",
 
 	{

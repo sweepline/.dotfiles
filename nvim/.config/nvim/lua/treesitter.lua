@@ -1,3 +1,12 @@
+-- Mason is not really tree-sitter but whatever.
+require("mason").setup()
+require('mason-tool-installer').setup({
+	ensure_installed = {
+		-- Tooling (not lsp)
+		"tree-sitter-cli",
+	}
+})
+
 local treesitter = require("nvim-treesitter")
 
 -- Enable Treesitter highligh to all filetypes that there are parsers for.

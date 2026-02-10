@@ -1,5 +1,3 @@
-require("mason").setup()
-require("mason-lspconfig").setup()
 local navic = require("nvim-navic")
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -111,41 +109,46 @@ vim.lsp.config("*", {
 	capabilities = capabilities,
 })
 
--- HTML/CSS/JS/TS/JSX/TSX
-vim.lsp.enable("html")
-vim.lsp.enable("cssls")
-vim.lsp.enable("cssmodules_ls")
-vim.lsp.enable("ts_ls")
-vim.lsp.enable("eslint")
 vim.lsp.config("stylelint_lsp", {
 	filetypes = { "css", "less", "scss", "sugarss", "vue", "wxss" }
 })
-vim.lsp.enable("stylelint_lsp")
-vim.lsp.enable("biome")
-
--- Python
-vim.lsp.enable("jedi_language_server")
-vim.lsp.enable("ruff")
-
--- Rust
 vim.lsp.config("rust_analyzer", {
 	capabilities = vim.tbl_extend('force', capabilities, { general = { positionEncodings = { "utf-16" } } }),
 })
-vim.lsp.enable("rust_analyzer")
-
--- Other
 vim.lsp.config("lua_ls", {
 	settings = {
 		Lua = { diagnostics = { globals = { "vim", "use" } } } }
 })
-vim.lsp.enable("lua_ls")
-vim.lsp.enable("clangd", {
+vim.lsp.config("clangd", {
 	settings = {
 		offsetEncoding = "utf-16",
 	}
 })
-vim.lsp.enable("gdscript")
-vim.lsp.enable("sqlls")
-vim.lsp.enable("dockerls")
-vim.lsp.enable("docker_compose_language_service")
-vim.lsp.enable("wgsl_analyzer")
+
+require('mason-lspconfig').setup({
+	ensure_installed = {
+		-- HTML/CSS/JS/TS/JSX/TSX
+		"html",
+		"cssls",
+		"cssmodules_ls",
+		"ts_ls",
+		"eslint",
+		"stylelint_lsp",
+		"biome",
+
+		-- Python
+		"jedi_language_server",
+		"ruff",
+
+		-- Rust
+		"rust_analyzer",
+
+		-- Other
+		"lua_ls",
+		"clangd",
+		"sqlls",
+		"dockerls",
+		"docker_compose_language_service",
+		"wgsl_analyzer",
+	}
+})
