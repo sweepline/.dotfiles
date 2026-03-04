@@ -112,6 +112,19 @@ vim.lsp.config("*", {
 vim.lsp.config("stylelint_lsp", {
 	filetypes = { "css", "less", "scss", "sugarss", "vue", "wxss" }
 })
+vim.lsp.config("basedpyright", {
+	settings = {
+		basedpyright = {
+			analysis = {
+				diagnosticSeverityOverrides = {
+					reportExplicitAny = false,
+					reportMissingTypeStubs = false,
+					reportUnusedCallResult = false,
+				}
+			}
+		}
+	}
+})
 vim.lsp.config("rust_analyzer", {
 	capabilities = vim.tbl_extend('force', capabilities, { general = { positionEncodings = { "utf-16" } } }),
 })
@@ -137,7 +150,7 @@ require('mason-lspconfig').setup({
 		"biome",
 
 		-- Python
-		"jedi_language_server",
+		"basedpyright",
 		"ruff",
 
 		-- Rust
