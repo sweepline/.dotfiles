@@ -1,4 +1,4 @@
--- vim.opt.completeopt = "menuone,noinsert,noselect"
+vim.opt.completeopt = "noinsert,noselect"
 -- vim.cmd [[set shortmess+=c]]
 
 local cmp = require 'cmp'

@@ -99,6 +99,23 @@ return require("lazy").setup({
 	"rose-pine/neovim",
 
 	-- Github Copilot
+	-- "github/copilot.vim",
+	{
+		"CopilotC-Nvim/CopilotChat.nvim",
+		dependencies = {
+			{ "nvim-lua/plenary.nvim", branch = "master" },
+		},
+		build = "make tiktoken",
+		opts = {
+			model = 'Claude Opus 4.6', -- AI model to use
+			temperature = 0.2, -- Lower = focused, higher = creative
+			window = {
+				layout = 'horizontal', -- 'vertical', 'horizontal', 'float'
+				width = 0.5, -- 50% of screen width
+			},
+			auto_insert_mode = true, -- Enter insert mode when opening
+		},
+	},
 	{
 		"zbirenbaum/copilot.lua",
 		cmd = "Copilot",
