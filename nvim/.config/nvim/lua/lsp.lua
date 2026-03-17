@@ -44,10 +44,10 @@ vim.lsp.protocol.CompletionItemKind = {
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
+-- vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<space>q', "<cmd>Telescope diagnostics bufnr=0<CR>")
+-- vim.keymap.set('n', '<space>q', "<cmd>Telescope diagnostics bufnr=0<CR>")
 
 local lsp_formatting = function(bufnr)
 	vim.lsp.buf.format({
@@ -61,7 +61,7 @@ local lsp_formatting = function(bufnr)
 		timeout_ms = 2000,
 	})
 end
-vim.keymap.set("n", "<space><Tab>", lsp_formatting);
+vim.keymap.set("n", "<leader><Tab>", lsp_formatting);
 
 vim.api.nvim_create_autocmd('LspAttach', {
 	callback = function(ev)
@@ -85,23 +85,23 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		local opts = { buffer = ev.buf }
 		-- Mappings.
 		-- See `:help vim.lsp.*` for documentation on any of the below functions
-		vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
-		vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
-		vim.keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
-		vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
-		vim.keymap.set("n", "gs", "<cmd>Telescope lsp_document_symbols<CR>", opts)
-		vim.keymap.set("n", "gS", "<cmd>Telescope lsp_workspace_symbols<CR>", opts)
-
+		-- vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
+		-- vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
+		-- vim.keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
+		-- vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
+		-- vim.keymap.set("n", "gs", "<cmd>Telescope lsp_document_symbols<CR>", opts)
+		-- vim.keymap.set("n", "gS", "<cmd>Telescope lsp_workspace_symbols<CR>", opts)
+		--
 		vim.keymap.set("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
 		vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
 
-		vim.keymap.set("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-		vim.keymap.set("n", "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-		vim.keymap.set("n", "<space>cr", "<cmd>lua vim.lsp.buf.range_code_action()<CR>", opts)
-
-		vim.keymap.set("n", "<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
-		vim.keymap.set("n", "<space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
-		vim.keymap.set("n", "<space>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
+		vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+		vim.keymap.set("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+		vim.keymap.set("n", "<leader>cr", "<cmd>lua vim.lsp.buf.range_code_action()<CR>", opts)
+		--
+		vim.keymap.set("n", "<leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
+		vim.keymap.set("n", "<leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
+		vim.keymap.set("n", "<leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
 	end,
 })
 
@@ -120,6 +120,8 @@ vim.lsp.config("basedpyright", {
 					reportExplicitAny = false,
 					reportMissingTypeStubs = false,
 					reportUnusedCallResult = false,
+					reportUnknownMemberType = false,
+					reportUnknownArgumentType = false,
 				}
 			}
 		}
@@ -137,6 +139,13 @@ vim.lsp.config("clangd", {
 		offsetEncoding = "utf-16",
 	}
 })
+vim.lsp.config("copilot", {
+	settings = {
+		telemetry = {
+			telemetryLevel = "all"
+		}
+	}
+})
 
 require('mason-lspconfig').setup({
 	ensure_installed = {
@@ -147,7 +156,7 @@ require('mason-lspconfig').setup({
 		"ts_ls",
 		"eslint",
 		"stylelint_lsp",
-		"biome",
+		"biome@2.4.6",
 
 		-- Python
 		"basedpyright",
@@ -163,5 +172,6 @@ require('mason-lspconfig').setup({
 		"dockerls",
 		"docker_compose_language_service",
 		"wgsl_analyzer",
+		"copilot",
 	}
 })
