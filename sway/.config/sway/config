@@ -236,7 +236,9 @@ smart_gaps on
 
 set $gnome-schema org.gnome.desktop.interface
 
-# exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+# Gnome keyring
+exec dbus-update-activation-environment --all
+exec gnome-keyring-daemon --start --components=secrets
 
 exec_always {
     gsettings set $gnome-schema gtk-theme 'Gruvbox-Material-Dark'
