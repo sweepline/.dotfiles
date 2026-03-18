@@ -5,6 +5,10 @@ return {
 	},
 	{
 		"mason-org/mason-lspconfig.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		dependencies = {
+			"mason-org/mason.nvim"
+		},
 		opts = {
 			ensure_installed = {
 				-- HTML/CSS/JS/TS/JSX/TSX
@@ -36,6 +40,7 @@ return {
 	},
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		event = { "BufReadPre", "BufNewFile" },
 		opts = {
 			ensure_installed = {
 				-- Tooling (not lsp)
@@ -45,9 +50,5 @@ return {
 	},
 	{
 		"neovim/nvim-lspconfig",
-		dependencies = {
-			"mason.nvim",
-			"mason-lspconfig.nvim"
-		},
 	}
 }

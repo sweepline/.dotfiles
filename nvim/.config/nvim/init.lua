@@ -31,12 +31,6 @@ require("lazy").setup({
 	checker = { enabled = true },
 })
 
--- Load other configs
--- require("plugins")
--- require("keymappings")
--- require("ui")
--- require("treesitter")
--- require("completion")
 require("lsp")
 
 

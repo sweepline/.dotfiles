@@ -11,6 +11,7 @@ return {
 	},
 	{
 		"rose-pine/neovim",
+		lazy = true,
 		name = "rose-pine",
 		config = function()
 			-- vim.cmd.colorscheme("rose-pine")

@@ -8,9 +8,13 @@ return {
 			require('crates').setup()
 		end,
 	},
-	"tikhomirov/vim-glsl",
+	{
+		"tikhomirov/vim-glsl",
+		lazy = true,
+	},
 	{
 		"terrortylor/nvim-comment",
+		lazy = true,
 		config = function()
 			require("nvim_comment").setup()
 		end,
@@ -26,7 +30,10 @@ return {
 		end
 	},
 	-- Git stuff
-	"tpope/vim-fugitive",
+	{
+		"tpope/vim-fugitive",
+		lazy = true,
+	},
 	-- sets shiftwidth and stuff
 	"tpope/vim-sleuth",
 	-- {

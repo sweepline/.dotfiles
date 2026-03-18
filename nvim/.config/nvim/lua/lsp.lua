@@ -1,7 +1,15 @@
-local navic = require("nvim-navic")
+local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities = vim.tbl_deep_extend('force', capabilities, require('blink.cmp').get_lsp_capabilities({}, false))
+
+capabilities = vim.tbl_deep_extend('force', capabilities, {
+	textDocument = {
+		foldingRange = {
+			dynamicRegistration = false,
+			lineFoldingOnly = true
+		}
+	}
+})
 
 -- Show which linter is reporting the error.
 vim.diagnostic.config({
@@ -12,35 +20,6 @@ vim.diagnostic.config({
 		source = "always", -- Or "if_many"
 	},
 })
-
--- Icons
-vim.lsp.protocol.CompletionItemKind = {
-	"", -- Text
-	"", -- Method
-	"", -- Function
-	"", -- Constructor
-	"", -- Field
-	"", -- Variable
-	"", -- Class
-	"ﰮ", -- Interface
-	"", -- Module
-	"", -- Property
-	"", -- Unit
-	"", -- Value
-	"", -- Enum
-	"", -- Keyword
-	"﬌", -- Snippet
-	"", -- Color
-	"", -- File
-	"", -- Reference
-	"", -- Folder
-	"", -- EnumMember
-	"", -- Constant
-	"", -- Struct
-	"", -- Event
-	"ﬦ", -- Operator
-	"" -- TypeParameter
-}
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -63,15 +42,6 @@ local lsp_formatting = function(bufnr)
 end
 vim.keymap.set("n", "<leader><Tab>", lsp_formatting);
 
-vim.api.nvim_create_autocmd('LspAttach', {
-	callback = function(ev)
-		local client = vim.lsp.get_client_by_id(ev.data.client_id)
-		if client.server_capabilities.documentSymbolProvider then
-			navic.attach(client, ev.buf)
-		end
-	end,
-})
-
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -83,15 +53,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		-- Buffer local mappings.
 		-- See `:help vim.lsp.*` for documentation on any of the below functions
 		local opts = { buffer = ev.buf }
-		-- Mappings.
-		-- See `:help vim.lsp.*` for documentation on any of the below functions
-		-- vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
-		-- vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
-		-- vim.keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
-		-- vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
-		-- vim.keymap.set("n", "gs", "<cmd>Telescope lsp_document_symbols<CR>", opts)
-		-- vim.keymap.set("n", "gS", "<cmd>Telescope lsp_workspace_symbols<CR>", opts)
-		--
+
 		vim.keymap.set("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
 		vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
 
@@ -113,6 +75,7 @@ vim.lsp.config("stylelint_lsp", {
 	filetypes = { "css", "less", "scss", "sugarss", "vue", "wxss" }
 })
 vim.lsp.config("basedpyright", {
+	capabilities = vim.tbl_extend('force', capabilities, { general = { positionEncodings = { "utf-16" } } }),
 	settings = {
 		basedpyright = {
 			analysis = {
@@ -126,6 +89,9 @@ vim.lsp.config("basedpyright", {
 			}
 		}
 	}
+})
+vim.lsp.config("biome", {
+	capabilities = vim.tbl_extend('force', capabilities, { general = { positionEncodings = { "utf-16" } } }),
 })
 vim.lsp.config("rust_analyzer", {
 	capabilities = vim.tbl_extend('force', capabilities, { general = { positionEncodings = { "utf-16" } } }),

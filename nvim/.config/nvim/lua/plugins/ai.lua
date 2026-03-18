@@ -1,21 +1,20 @@
 return {
-	-- Copilot integration
-	-- {
-	-- 	"zbirenbaum/copilot.lua",
-	-- 	cmd = "Copilot",
-	-- 	build = ":Copilot auth",
-	-- 	event = "BufReadPost",
-	-- 	opts = {
-	-- 		suggestion = { enabled = false },
-	-- 		panel = { enabled = false },
-	-- 	},
-	-- },
-	-- {
-	-- 	"zbirenbaum/copilot-cmp",
-	-- },
+	-- Sidekick is for Next Edit Suggestion and CLI
 	{
 		"folke/sidekick.nvim",
 		opts = {
+			nes = {
+				enabled = true,
+				trigger = {
+					-- events that trigger sidekick next edit suggestions
+					events = { "ModeChanged i:n", "TextChanged", "User SidekickNesDone" },
+				},
+				clear = {
+					-- events that clear the current next edit suggestion
+					events = { "TextChangedI", "InsertEnter" },
+					esc = true, -- clear next edit suggestions when pressing <Esc>
+				},
+			},
 			cli = {
 				mux = {
 					backend = "zellij",

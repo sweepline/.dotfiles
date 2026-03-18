@@ -31,7 +31,7 @@ vim.opt.listchars = "tab:▷ ,trail:·,extends:◣,precedes:◢,nbsp:○"
 vim.cmd("command BD b#|bd#")
 
 -- Highlight yank
-vim.cmd("au TextYankPost * lua vim.highlight.on_yank {on_visual = false}")
+vim.cmd("au TextYankPost * lua vim.hl.on_yank {on_visual = false}")
 
 -- Highlight trailing whitespace
 vim.cmd(
