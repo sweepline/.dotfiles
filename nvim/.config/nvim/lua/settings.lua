@@ -1,3 +1,9 @@
+-- Make sure to setup `mapleader` and `maplocalleader` before
+-- loading lazy.nvim so that mappings are correct.
+-- This is also a good place to setup other settings (vim.opt)
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
 local indent = 4
 
 vim.cmd("filetype plugin indent on")
@@ -30,7 +36,14 @@ vim.cmd("au TextYankPost * lua vim.highlight.on_yank {on_visual = false}")
 -- Highlight trailing whitespace
 vim.cmd(
 	"autocmd ColorScheme * highlight ExtraWhitespace ctermbg=darkred guibg=darkred")
-vim.cmd([[autocmd InsertLeave * syn match ExtraWhitespace /\s\+$\| \+\ze\t/]])
+vim.cmd([[autocmd InsertLeave * if expand('%') != '' | syn match ExtraWhitespace /\s\+$\| \+\ze\t/ | endif]])
 vim.cmd("autocmd InsertEnter * syn clear ExtraWhitespace")
 
 vim.filetype.add({ extension = { wgsl = "wgsl" } })
+
+vim.opt.termguicolors = true
+vim.opt.background = "dark"
+
+vim.opt.completeopt = "noinsert,noselect"
+-- vim.cmd [[set shortmess+=c]]
+
