@@ -20,8 +20,41 @@ return {
 					cycle = true,
 					--- Use the default layout or vertical if the window is too narrow
 					preset = function()
-						return vim.o.columns >= 160 and "ivy" or "ivy_split"
+						return vim.o.columns >= 160 and "horizontal" or "vertical"
 					end,
+				},
+				layouts = {
+					horizontal = {
+						layout = {
+							box = 'horizontal',
+							width = 0.9,
+							min_width = 120,
+							height = 0.9,
+							{
+								box = "vertical",
+								border = true,
+								title = "{title} {live} {flags}",
+								{ win = "input", height = 1,     border = "bottom" },
+								{ win = "list",  border = "none" },
+							},
+							{ win = "preview", title = "{preview}", border = true, width = 0.5 },
+						}
+					},
+					vertical = {
+						layout = {
+							box = "vertical",
+							width = 0.9,
+							min_width = 80,
+							height = 0.9,
+							min_height = 30,
+							border = true,
+							title = "{title} {live} {flags}",
+							title_pos = "center",
+							{ win = "input",   height = 1,          border = "bottom" },
+							{ win = "list",    border = "none" },
+							{ win = "preview", title = "{preview}", height = 0.4,     border = "top" },
+						},
+					},
 				},
 			},
 			quickfile = { enabled = true },
