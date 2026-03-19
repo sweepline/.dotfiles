@@ -6,11 +6,19 @@ vim.g.maplocalleader = "\\"
 
 local indent = 4
 
+-- Enable filetype detection, filetype plugins, and filetype-based indentation
 vim.cmd("filetype plugin indent on")
+-- Tab character displays as 4 spaces wide
 vim.opt.tabstop = indent
+-- >> / << and auto-indent use 4 spaces
 vim.opt.shiftwidth = indent
+-- Tab/backspace in insert mode moves 4 spaces
+vim.opt.softtabstop = indent
+-- Insert real tab characters, not spaces
 vim.opt.expandtab = false
+-- Auto-indent new lines based on code structure
 vim.opt.smartindent = true
+-- Round indentation to nearest multiple of shiftwidth
 vim.opt.shiftround = true
 
 
@@ -19,37 +27,39 @@ vim.o.foldlevelstart = 20    -- start folded if more than 20
 vim.wo.foldnestmax = 3
 vim.wo.foldminlines = 5
 
+-- Allow switching buffers without saving
 vim.opt.hidden = true
+-- Case-insensitive search by default
 vim.opt.ignorecase = true
+-- Override ignorecase when search contains uppercase letters
 vim.opt.smartcase = true
+-- Keep 4 lines visible above/below cursor when scrolling
 vim.opt.scrolloff = 4
+-- Keep 8 columns visible left/right of cursor when scrolling
+vim.opt.sidescrolloff = 8
+-- Open horizontal splits below the current window
 vim.opt.splitbelow = true
+-- Open vertical splits to the right of the current window
 vim.opt.splitright = true
+-- Tab completion: list all matches and complete to longest common prefix
 vim.opt.wildmode = "list:longest"
-vim.opt.cursorline = false
+-- Show absolute line numbers
 vim.wo.number = true
+-- Disable relative line numbers
 vim.wo.relativenumber = false
+-- Highlight the line the cursor is on
 vim.opt.cursorline = true
 
+-- Show invisible characters
+vim.opt.list = true
 vim.opt.listchars = "tab:▷ ,trail:·,extends:◣,precedes:◢,nbsp:○"
-
--- close buffer without closing window
-vim.cmd("command BD b#|bd#")
 
 -- Highlight yank
 vim.cmd("au TextYankPost * lua vim.hl.on_yank {on_visual = false}")
 
--- Highlight trailing whitespace
-vim.cmd(
-	"autocmd ColorScheme * highlight ExtraWhitespace ctermbg=darkred guibg=darkred")
-vim.cmd([[autocmd InsertLeave * if expand('%') != '' | syn match ExtraWhitespace /\s\+$\| \+\ze\t/ | endif]])
-vim.cmd("autocmd InsertEnter * syn clear ExtraWhitespace")
-
 vim.filetype.add({ extension = { wgsl = "wgsl" } })
 
+-- Use 24-bit colors
 vim.opt.termguicolors = true
+-- Dark mode
 vim.opt.background = "dark"
-
-vim.opt.completeopt = "noinsert,noselect"
--- vim.cmd [[set shortmess+=c]]
-
