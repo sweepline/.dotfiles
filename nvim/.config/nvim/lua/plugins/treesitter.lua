@@ -21,19 +21,12 @@ return {
 						)
 					then
 						vim.treesitter.start(args.buf)
+						vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+						vim.wo.foldmethod = 'expr'
+						vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 					end
 				end,
 			})
-
-			-- Treesitter folding
-			vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-			vim.wo[0][0].foldmethod = 'expr'
-			vim.o.foldlevelstart = 20 -- start folded if more than 20
-			vim.wo[0][0].foldnestmax = 3
-			vim.wo[0][0].foldminlines = 5
-
-			-- Treesitter indentation
-			vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 		end
 	},
 	{

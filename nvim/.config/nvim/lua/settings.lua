@@ -13,6 +13,12 @@ vim.opt.expandtab = false
 vim.opt.smartindent = true
 vim.opt.shiftround = true
 
+
+-- Treesitter folding
+vim.o.foldlevelstart = 20    -- start folded if more than 20
+vim.wo.foldnestmax = 3
+vim.wo.foldminlines = 5
+
 vim.opt.hidden = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
