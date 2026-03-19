@@ -103,6 +103,7 @@ return {
 			{ "<leader>sb",      function() Snacks.picker.lines() end,                                   desc = "Buffer Lines" },
 			{ "<leader>sc",      function() Snacks.picker.command_history() end,                         desc = "Command History" },
 			{ "<leader>sC",      function() Snacks.picker.commands() end,                                desc = "Commands" },
+			{ "<leader>d",       vim.diagnostic.open_float,                                              desc = "Open diagnostic" },
 			{ "<leader>sd",      function() Snacks.picker.diagnostics() end,                             desc = "Diagnostics" },
 			{ "<leader>sD",      function() Snacks.picker.diagnostics_buffer() end,                      desc = "Buffer Diagnostics" },
 			{ "<leader>sh",      function() Snacks.picker.help() end,                                    desc = "Help Pages" },
@@ -130,6 +131,7 @@ return {
 			{ "<leader>sS",      function() Snacks.picker.lsp_workspace_symbols() end,                   desc = "LSP Workspace Symbols" },
 			-- LSP under gl as gr overwrites that menu
 			{ "gla",             vim.lsp.buf.code_action,                                                desc = "Code Action" },
+			{ "gls",             vim.lsp.buf.range_code_action,                                          desc = "Range Code Action" },
 			{ "gln",             vim.lsp.buf.rename,                                                     desc = "Rename" },
 			{ "gld",             function() Snacks.picker.lsp_definitions() end,                         desc = "Goto Definition" },
 			{ "glD",             function() Snacks.picker.lsp_declarations() end,                        desc = "Goto Declaration" },
