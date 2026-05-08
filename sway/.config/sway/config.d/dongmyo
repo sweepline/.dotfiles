@@ -10,6 +10,8 @@ output eDP-1 {
     resolution 1920x1200
 }
 
+seat * hide_cursor when-typing enable
+
 ### Input configuration
 #
 # Example configuration:

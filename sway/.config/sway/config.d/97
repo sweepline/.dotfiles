@@ -17,6 +17,8 @@ output 'Lenovo Group Limited LEN G34w-10 UGW05532' {
     adaptive_sync off
 }
 
+seat * hide_cursor when-typing disable
+
 ### Input configuration
 #
 # Example configuration:
@@ -67,6 +69,8 @@ assign [app_id="spotify"] 5
 assign [instance="discord"] 5
 assign [instance="com.github.th_ch.youtube_music"] 5
 
+assign [title="Battle.net"] 4
+for_window [title="Battle.net"] floating enable
 
 ### Startup programs
 

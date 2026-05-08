@@ -57,8 +57,6 @@ exec swayidle -w \
 
 bindsym $mod+Shift+w exec '$lock_command'
 
-seat * hide_cursor when-typing enable
-
 ### Key bindings
 #
 # Basics:

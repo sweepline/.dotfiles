@@ -22,6 +22,8 @@ output 'Dell Inc. DELL U2717D J0XYN989DC8S' {
     transform 270
 }
 
+seat * hide_cursor when-typing enable
+
 ### Input configuration
 #
 # Example configuration:
