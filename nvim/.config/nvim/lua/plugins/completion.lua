@@ -31,7 +31,8 @@ return {
 			-- See :h blink-cmp-config-keymap for defining your own keymap
 			-- keymap = { preset = 'default' },
 			keymap = {
-				preset = "enter",
+				preset = "default",
+				-- TODO: Maybe add c-n for opening
 				["<Tab>"] = {
 					"snippet_forward",
 					function() -- sidekick next edit suggestion
@@ -50,9 +51,8 @@ return {
 			completion = {
 				ghost_text = {
 					enabled = true,
-					show_without_menu = false,
+					show_without_menu = true,
 				},
-				-- Only show the menu when triggered
 				menu = {
 					auto_show = false,
 				},

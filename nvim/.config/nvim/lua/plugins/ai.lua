@@ -4,20 +4,15 @@ return {
 		"folke/sidekick.nvim",
 		opts = {
 			nes = {
-				enabled = true,
+				debounce = 250,
 				trigger = {
 					-- events that trigger sidekick next edit suggestions
-					events = { "ModeChanged i:n", "TextChanged", "User SidekickNesDone" },
-				},
-				clear = {
-					-- events that clear the current next edit suggestion
-					events = { "TextChangedI", "InsertEnter" },
-					esc = true, -- clear next edit suggestions when pressing <Esc>
+					events = { "ModeChanged i:n", "CursorMoved", "TextChanged", "User SidekickNesDone" },
 				},
 			},
 			cli = {
 				mux = {
-					backend = "zellij",
+					backend = "tmux",
 					enabled = true,
 				},
 				win = {
@@ -44,6 +39,19 @@ return {
 				end,
 				expr = true,
 				desc = "Goto/Apply Next Edit Suggestion",
+			},
+			-- Manual trigger NES, not needed with "CursorMoved" trigger event.
+			-- {
+			-- 	"<c-k>",
+			-- 	function() require("sidekick.nes").update() end,
+			-- 	desc = "Sidekick NES Update",
+			-- 	mode = { "n", "i", "x" },
+			-- },
+			{
+				"<c-;>",
+				function() require("sidekick.nes").toggle() end,
+				desc = "Sidekick NES Toggle",
+				mode = { "n", "t", "i", "x" },
 			},
 			{
 				"<c-.>",

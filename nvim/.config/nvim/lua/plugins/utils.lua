@@ -32,7 +32,7 @@ return {
 	-- Git stuff
 	{
 		"tpope/vim-fugitive",
-		lazy = true,
+		lazy = false,
 	},
 	-- sets shiftwidth and stuff
 	"tpope/vim-sleuth",

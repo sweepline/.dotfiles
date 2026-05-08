@@ -39,8 +39,10 @@ export PATH="$PNPM_HOME:$PATH"
 # Work stuff
 alias localstack="$HOME/repos/mono/scripts/localstack.py"
 export SCCACHE_REDIS=redis://esa
-alias pyscadmin="ssh -t ws8 pyscadmin"
 alias vncstart="wayvnc -o DP-5 -g 0.0.0.0"
+findimage() {
+  sadmin listImages -e 'docker:sadmin.scalgo.com/{image}@{hash} {rel_time} {labels[GIT_BRANCH]}' -i ${1:-$(basename `pwd`)} | grep `git rev-parse --abbrev-ref HEAD`
+}
 
 # Qute aliases
 alias bp="bpython"

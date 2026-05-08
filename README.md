@@ -14,8 +14,9 @@ Flickering or white screen on amdgpu? Try kernel param `amdgpu.sg_display=0`.
 ## Package list
 
 ```
+yazi
+bottom
 bpython
-fscrypt
 fzf
 git
 grimshot
@@ -32,7 +33,6 @@ ripgrep
 rofi-wayland
 rustup
 signal-desktop
-youtube-music-bin
 stow
 sway
 swaybg
