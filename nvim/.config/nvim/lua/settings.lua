@@ -62,4 +62,4 @@ vim.filetype.add({ extension = { wgsl = "wgsl" } })
 -- Use 24-bit colors
 vim.opt.termguicolors = true
 -- Dark mode
-vim.opt.background = "dark"
+-- vim.opt.background = "dark"

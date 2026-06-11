@@ -12,11 +12,30 @@ end
 
 -- This is where you actually apply your config choices
 
+-- Dynamic color
+-- wezterm.gui is not available to the mux server, so take care to
+-- do something reasonable when this config is evaluated by the mux
+function get_appearance()
+  if wezterm.gui then
+    return wezterm.gui.get_appearance()
+  end
+  return 'Dark'
+end
+
+function scheme_for_appearance(appearance)
+  if appearance:find 'Dark' then
+    return 'Gruvbox Dark (Gogh)'
+  else
+    return 'Gruvbox (Gogh)'
+  end
+end
+
+
 -- For example, changing the color scheme:
-config.font = wezterm.font "Iosevka Fixed Slab"
-config.font_size = 14
+config.font = wezterm.font "Iosevka Fixed"
+config.font_size = 12
 config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
-config.color_scheme = 'Gruvbox Material (Gogh)'
+config.color_scheme = scheme_for_appearance(get_appearance())
 config.enable_tab_bar = false
 --config.disable_default_key_bindings = true
 

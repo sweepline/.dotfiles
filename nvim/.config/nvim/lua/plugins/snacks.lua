@@ -1,3 +1,13 @@
+local function snacks_dirs()
+	local cwd = vim.fn.getcwd()
+	local webcore_projects = { "webmap", "pdfreports", "weblogin", "scadmin" }
+	for _, name in ipairs(webcore_projects) do
+		if cwd:match("mono/" .. name .. "$") then
+			return { cwd, vim.fn.fnamemodify(cwd .. "/../webcore", ":p") }
+		end
+	end
+end
+
 return {
 	{
 		"folke/snacks.nvim",
@@ -18,9 +28,10 @@ return {
 				enabled = true,
 				layout = {
 					cycle = true,
-					--- Use the default layout or vertical if the window is too narrow
+					--- Use the default layout or vertical if the window is taller than wide
+					--- Use an aspect of 2.5 as a "pixel"(contains 1 letter) in the terminal is higher than wide.
 					preset = function()
-						return vim.o.columns >= 160 and "horizontal" or "vertical"
+						return vim.o.columns / vim.o.lines > 2.5 and "horizontal" or "vertical"
 					end,
 				},
 				layouts = {
@@ -65,16 +76,16 @@ return {
 		},
 		keys = {
 			-- Top Pickers & Explorer
-			{ "<leader><space>", function() Snacks.picker.smart() end,                                   desc = "Smart Find Files" },
+			{ "<leader><space>", function() Snacks.picker.smart({ dirs = snacks_dirs() }) end,           desc = "Smart Find Files" },
 			{ "<leader>,",       function() Snacks.picker.buffers() end,                                 desc = "Buffers" },
-			{ "<leader>/",       function() Snacks.picker.grep() end,                                    desc = "Grep" },
+			{ "<leader>/",       function() Snacks.picker.grep({ dirs = snacks_dirs() }) end,             desc = "Grep" },
 			{ "<leader>:",       function() Snacks.picker.command_history() end,                         desc = "Command History" },
 			{ "<leader>n",       function() Snacks.picker.notifications() end,                           desc = "Notification History" },
 			{ "<leader>e",       function() Snacks.explorer() end,                                       desc = "File Explorer" },
 			-- find
 			{ "<leader>fb",      function() Snacks.picker.buffers() end,                                 desc = "Buffers" },
 			{ "<leader>fc",      function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
-			{ "<leader>ff",      function() Snacks.picker.files() end,                                   desc = "Find Files" },
+			{ "<leader>ff",      function() Snacks.picker.files({ dirs = snacks_dirs() }) end,            desc = "Find Files" },
 			{ "<leader>fg",      function() Snacks.picker.git_files() end,                               desc = "Find Git Files" },
 			{ "<leader>fp",      function() Snacks.picker.projects() end,                                desc = "Projects" },
 			{ "<leader>fr",      function() Snacks.picker.recent() end,                                  desc = "Recent" },
@@ -94,8 +105,8 @@ return {
 			-- Grep
 			{ "<leader>sb",      function() Snacks.picker.lines() end,                                   desc = "Buffer Lines" },
 			{ "<leader>sB",      function() Snacks.picker.grep_buffers() end,                            desc = "Grep Open Buffers" },
-			{ "<leader>sg",      function() Snacks.picker.grep() end,                                    desc = "Grep" },
-			{ "<leader>sw",      function() Snacks.picker.grep_word() end,                               desc = "Visual selection or word",   mode = { "n", "x" } },
+			{ "<leader>sg",      function() Snacks.picker.grep({ dirs = snacks_dirs() }) end,             desc = "Grep" },
+			{ "<leader>sw",      function() Snacks.picker.grep_word({ dirs = snacks_dirs() }) end,        desc = "Visual selection or word",   mode = { "n", "x" } },
 			-- search
 			{ '<leader>s"',      function() Snacks.picker.registers() end,                               desc = "Registers" },
 			{ '<leader>s/',      function() Snacks.picker.search_history() end,                          desc = "Search History" },
@@ -104,8 +115,8 @@ return {
 			{ "<leader>sc",      function() Snacks.picker.command_history() end,                         desc = "Command History" },
 			{ "<leader>sC",      function() Snacks.picker.commands() end,                                desc = "Commands" },
 			{ "<leader>d",       vim.diagnostic.open_float,                                              desc = "Open diagnostic" },
-			{ "<leader>sd",      function() Snacks.picker.diagnostics() end,                             desc = "Diagnostics" },
-			{ "<leader>sD",      function() Snacks.picker.diagnostics_buffer() end,                      desc = "Buffer Diagnostics" },
+			{ "<leader>sD",      function() Snacks.picker.diagnostics() end,                             desc = "Diagnostics" },
+			{ "<leader>sd",      function() Snacks.picker.diagnostics_buffer() end,                      desc = "Buffer Diagnostics" },
 			{ "<leader>sh",      function() Snacks.picker.help() end,                                    desc = "Help Pages" },
 			{ "<leader>sH",      function() Snacks.picker.highlights() end,                              desc = "Highlights" },
 			{ "<leader>si",      function() Snacks.picker.icons() end,                                   desc = "Icons" },
@@ -120,6 +131,7 @@ return {
 			{ "<leader>su",      function() Snacks.picker.undo() end,                                    desc = "Undo History" },
 			{ "<leader>uC",      function() Snacks.picker.colorschemes() end,                            desc = "Colorschemes" },
 			-- LSP
+			{ "g.",             vim.lsp.buf.code_action,                                                 desc = "Code Action" },
 			{ "gd",              function() Snacks.picker.lsp_definitions() end,                         desc = "Goto Definition" },
 			{ "gD",              function() Snacks.picker.lsp_declarations() end,                        desc = "Goto Declaration" },
 			{ "gr",              function() Snacks.picker.lsp_references() end,                          desc = "References",                 nowait = true },
