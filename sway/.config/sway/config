@@ -22,7 +22,7 @@ set $right l
 
 
 # Your preferred terminal emulator
-set $term wezterm
+set $term kitty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -230,6 +230,10 @@ gaps outer 0
 gaps inner 20
 smart_gaps on
 
+## DMS
+# exec dbus-update-activation-environment --systemd --all
+# exec systemctl --user start sway-session.target
+
 ## Fix GTK
 
 set $gnome-schema org.gnome.desktop.interface
@@ -239,11 +243,11 @@ exec dbus-update-activation-environment --all
 exec gnome-keyring-daemon --start --components=secrets
 
 exec_always {
-    gsettings set $gnome-schema gtk-theme 'Gruvbox-Material-Dark'
+    gsettings set $gnome-schema gtk-theme 'Gruvbox-Material-Light'
     gsettings set $gnome-schema icon-theme 'Gruvbox-Material-Dark'
     # gsettings set $gnome-schema cursor-theme 'Your cursor Theme'
     gsettings set $gnome-schema font-name 'Iosevka Aile'
-    gsettings set $gnome-schema color-scheme 'prefer-dark'
+    gsettings set $gnome-schema color-scheme 'prefer-light'
 }
 
 ### Window rules

@@ -134,8 +134,8 @@ return {
 			})
 		end,
 		keys = {
-			{ "]e", function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR }) end, desc = "Go to next error" },
-			{ "[e", function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR }) end, desc = "Go to previous error" },
+			{ "]e", function() vim.diagnostic.jump({ severity = vim.diagnostic.severity.ERROR, count = 1 }) end,  desc = "Go to next error" },
+			{ "[e", function() vim.diagnostic.jump({ severity = vim.diagnostic.severity.ERROR, count = -1 }) end, desc = "Go to previous error" },
 			{
 				"<leader><Tab>",
 				function()

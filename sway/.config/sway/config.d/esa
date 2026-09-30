@@ -6,17 +6,17 @@
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
 output 'Dell Inc. DELL U2717D J0XYN989DC7S' {
-    background ~/Pictures/sea.jpg fill
+    background ~/wallpapers/sea.jpg fill
     resolution 2560x1440
     position 0,0
 }
 output 'Dell Inc. DELL U2717D ND7GD846719S' {
-    background ~/Pictures/sea.jpg fill
+    background ~/wallpapers/sea.jpg fill
     resolution 2560x1440
     position 0,0
 }
 output 'Dell Inc. DELL U2717D J0XYN989DC8S' {
-    background ~/Pictures/flower.jpg fill
+    background ~/wallpapers/flower.jpg fill
     resolution 2560x1440
     position 2560,-280
     transform 270
