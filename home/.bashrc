@@ -44,13 +44,7 @@ findimage() {
   sadmin listImages -e 'docker:sadmin.scalgo.com/{image}@{hash} {rel_time} {labels[GIT_BRANCH]}' -i ${1:-$(basename `pwd`)} | grep `git rev-parse --abbrev-ref HEAD`
 }
 
-copilotlocal() {
-  COPILOT_PROVIDER_BASE_URL=http://gpu05:7547/v1 \
-  COPILOT_MODEL=qwen3.8-flash-next \
-  COPILOT_PROVIDER_MAX_PROMPT_TOKENS=229376 \
-  COPILOT_PROVIDER_MAX_OUTPUT_TOKENS=32768 \
-  command copilot "$@"
-}
+alias oc=opencode
 
 # Qute aliases
 alias bp="bpython"

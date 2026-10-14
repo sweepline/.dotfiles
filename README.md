@@ -4,6 +4,8 @@ To use these configs as is, clone it to `~/.dotfiles`
 
 Files are managed with `stow`, just `stow nvim` to symlink the nvim config.
 
+For `opencode`, use `stow --no-folding opencode` so `~/.config/opencode` stays a real directory and machine-local state like `service.json` (which contains a local service password) is not written into the repository.
+
 ## Other tidbits
 
 Disable the power key on your HHKB by changing `/etc/systemd/logind.conf`
