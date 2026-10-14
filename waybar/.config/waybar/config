@@ -7,7 +7,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad"],
     "modules-center": ["sway/window"],
-    "modules-right": ["mpd", "idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "temperature", "backlight", "keyboard-state", "sway/language", "battery", "battery#bat2", "clock", "tray"],
+    "modules-right": ["mpd", "idle_inhibitor", "custom/theme", "pulseaudio", "network", "cpu", "memory", "temperature", "backlight", "keyboard-state", "sway/language", "battery", "battery#bat2", "clock", "tray"],
     // Modules configuration
     // "sway/workspaces": {
     //     "disable-scroll": true,
@@ -76,6 +76,12 @@
             "activated": "",
             "deactivated": ""
         }
+    },
+    "custom/theme": {
+        "exec": "$HOME/.config/waybar/scripts/theme.sh watch",
+        "return-type": "json",
+        "on-click": "$HOME/.config/waybar/scripts/theme.sh",
+        "tooltip": true
     },
     "tray": {
         // "icon-size": 21,

@@ -230,6 +230,20 @@ label:focus {
     color: #2d3436;
 }
 
+#custom-theme {
+    padding: 0 10px;
+}
+
+#custom-theme.light {
+    background-color: #fbf1c7;
+    color: #654735;
+}
+
+#custom-theme.dark {
+    background-color: #282828;
+    color: #ddc7a1;
+}
+
 #mpd {
     background-color: #66cc99;
     color: #2a5c45;
