@@ -3,12 +3,14 @@
   "defaultProvider": "localllms",
   "defaultModel": "qwen3.8-flash-next",
   "packages": [
-    "npm:billion-context",
     "npm:pi-web-access",
     "npm:@juicesharp/rpiv-ask-user-question",
-    "npm:@juicesharp/rpiv-todo",
-    "npm:@plannotator/pi-extension",
-    "npm:pi-subagents"
+    "npm:pi-better-sandbox",
+    "npm:pi-better-subagents",
+    "npm:pi-better-background-tasks",
+    "npm:pi-better-ssh",
+    "npm:pi-better-goal",
+    "npm:pi-better-plan"
   ],
   "extensions": [],
   "enabledModels": [
@@ -18,5 +20,43 @@
     "github-copilot/claude-sonnet-5.5",
     "github-copilot/gemini-4-argon",
     "github-copilot/gpt-6.1-sol"
-  ]
+  ],
+  "piBetterHarness": {
+    "sandboxPermissions": {
+      "version": 1,
+      "permissions": {
+        "main": {
+          "enabled": true,
+          "projectFiles": "read-write",
+          "outsideProject": "read",
+          "storedCredentials": "read",
+          "commands": true,
+          "network": true,
+          "processAccess": "read"
+        },
+        "subagents": {
+          "enabled": true,
+          "projectFiles": "read-write",
+          "outsideProject": "read",
+          "storedCredentials": "off",
+          "commands": true,
+          "network": false,
+          "processAccess": "off"
+        },
+        "subagentTools": {
+          "applyPatch": true,
+          "trusted": [
+            {
+              "name": "web_fetch",
+              "package": "npm:@juicesharp/rpiv-web-tools"
+            },
+            {
+              "name": "web_search",
+              "package": "npm:@juicesharp/rpiv-web-tools"
+            }
+          ]
+        }
+      }
+    }
+  }
 }
