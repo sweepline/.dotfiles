@@ -6,6 +6,8 @@ Files are managed with `stow`, just `stow nvim` to symlink the nvim config.
 
 For `opencode`, use `stow --no-folding opencode` so `~/.config/opencode` stays a real directory and machine-local state like `service.json` (which contains a local service password) is not written into the repository.
 
+For `pi`, also use `stow --no-folding pi` so `~/.pi/agent` stays a real directory and secrets/state like `auth.json` and `sessions/` are not written into the repository. Only `settings.json`, `models.json` and `mcp.json` are tracked.
+
 ## Other tidbits
 
 Disable the power key on your HHKB by changing `/etc/systemd/logind.conf`

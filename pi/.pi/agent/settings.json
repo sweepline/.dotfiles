@@ -1,0 +1,22 @@
+{
+  "lastChangelogVersion": "1.2.0",
+  "defaultProvider": "localllms",
+  "defaultModel": "qwen3.8-flash-next",
+  "packages": [
+    "npm:billion-context",
+    "npm:pi-web-access",
+    "npm:@juicesharp/rpiv-ask-user-question",
+    "npm:@juicesharp/rpiv-todo",
+    "npm:@plannotator/pi-extension",
+    "npm:pi-subagents"
+  ],
+  "extensions": [],
+  "enabledModels": [
+    "localllms/qwen3.8-flash-next",
+    "deepseek/deepseek-flash",
+    "github-copilot/claude-opus-5.5",
+    "github-copilot/claude-sonnet-5.5",
+    "github-copilot/gemini-4-argon",
+    "github-copilot/gpt-6.1-sol"
+  ]
+}

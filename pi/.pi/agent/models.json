@@ -1,0 +1,18 @@
+{
+  "$schema": "https://pi.dev/schemas/models.schema.json",
+  "providers": {
+    "localllms": {
+      "baseUrl": "http://gpu05:7547/v1",
+      "api": "openai-completions",
+      "apiKey": "EMPTY",
+      "models": [
+        {
+          "id": "qwen3.8-flash-next",
+          "name": "Qwen3.8 Flash-Next (local)",
+          "contextWindow": 262144,
+          "maxTokens": 32768
+        }
+      ]
+    }
+  }
+}

@@ -1,2 +1,4 @@
 .git
 opencode/.config/opencode/service.json
+pi/.pi/agent/auth.json
+pi/.pi/agent/mcp-auth.json
