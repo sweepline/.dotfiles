@@ -1,16 +1,18 @@
 {
-  "lastChangelogVersion": "1.2.0",
+  "lastChangelogVersion": "1.3.0",
   "defaultProvider": "localllms",
   "defaultModel": "qwen3.8-flash-next",
   "packages": [
-    "npm:pi-web-access",
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:pi-better-sandbox",
     "npm:pi-better-subagents",
     "npm:pi-better-background-tasks",
     "npm:pi-better-ssh",
     "npm:pi-better-goal",
-    "npm:pi-better-plan"
+    "npm:pi-better-plan",
+    "npm:pi-powerline-footer",
+    "npm:pi-local-token-costs",
+    "npm:pi-btw"
   ],
   "extensions": [],
   "enabledModels": [
