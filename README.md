@@ -54,4 +54,6 @@ mako
 ncspot
 wf-recorder
 wl-clipboard
+mimeapps
+swayimg
 ```
