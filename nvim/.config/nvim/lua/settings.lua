@@ -59,6 +59,23 @@ vim.cmd("au TextYankPost * lua vim.hl.on_yank {on_visual = false}")
 
 vim.filetype.add({ extension = { wgsl = "wgsl" } })
 
+-- Keep treesitter injection highlights (e.g. glsl in strings) over LSP string tokens
+local function clear_lsp_string_hl()
+	vim.api.nvim_set_hl(0, "@lsp.type.string", {})
+end
+clear_lsp_string_hl()
+vim.api.nvim_create_autocmd({ "LspAttach", "ColorScheme" }, {
+	callback = clear_lsp_string_hl,
+})
+
+-- Disable line wrap for markdown files
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "markdown",
+	callback = function()
+		vim.opt_local.wrap = false
+	end,
+})
+
 -- Use 24-bit colors
 vim.opt.termguicolors = true
 -- Dark mode

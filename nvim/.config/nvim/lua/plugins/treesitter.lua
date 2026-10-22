@@ -13,12 +13,12 @@ return {
 				callback = function(args)
 					if
 					-- is arg2 in arg1
-						vim.list_contains(
-						-- all installed parsers
-							treesitter.get_installed(),
-							-- get parser for current language
-							vim.treesitter.language.get_lang(args.match)
-						)
+					    vim.list_contains(
+					    -- all installed parsers
+						    treesitter.get_installed(),
+						    -- get parser for current language
+						    vim.treesitter.language.get_lang(args.match)
+					    )
 					then
 						vim.treesitter.start(args.buf)
 						vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
@@ -28,6 +28,29 @@ return {
 				end,
 			})
 		end
+	},
+	{
+		"dariuscorvus/tree-sitter-language-injection.nvim",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		opts = function()
+			-- `/* glsl */ `...`` injects glsl into the template string
+			local glsl = {
+				langs = { { name = "glsl", match = "^/\\*+( )*{lang}( )*\\*+/$" } },
+				query = [[
+; query
+;; inline block comment {name} injection
+((comment) @comment .
+  (template_string (string_fragment) @injection.content)
+  (#match? @comment "{match}")
+  (#set! injection.language "{name}"))
+]],
+			}
+
+			return {
+				javascript = { inline_block_comment = glsl },
+				typescript = { inline_block_comment = glsl },
+			}
+		end,
 	},
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
@@ -73,7 +96,8 @@ return {
 			{
 				"am",
 				function()
-					require("nvim-treesitter-textobjects.select").select_textobject("@function.outer", "textobjects")
+					require("nvim-treesitter-textobjects.select").select_textobject(
+						"@function.outer", "textobjects")
 				end,
 				mode = { "x", "o" },
 				desc = "around function"
@@ -82,7 +106,8 @@ return {
 			{
 				"im",
 				function()
-					require("nvim-treesitter-textobjects.select").select_textobject("@function.inner",
+					require("nvim-treesitter-textobjects.select").select_textobject(
+						"@function.inner",
 						"textobjects")
 				end,
 				mode = { "x", "o" },
@@ -119,9 +144,23 @@ return {
 				desc = "around scope"
 			},
 			-- Swap current parameter with the next one
-			{ "<leader>tn", function() require("nvim-treesitter-textobjects.swap").swap_next("@parameter.inner") end,     desc = "swap with next object" },
+			{
+				"<leader>tn",
+				function()
+					require("nvim-treesitter-textobjects.swap").swap_next(
+						"@parameter.inner")
+				end,
+				desc = "swap with next object"
+			},
 			-- Swap current parameter with the previous one
-			{ "<leader>tp", function() require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.outer") end, desc = "swap with previous object" },
+			{
+				"<leader>tp",
+				function()
+					require("nvim-treesitter-textobjects.swap").swap_previous(
+						"@parameter.outer")
+				end,
+				desc = "swap with previous object"
+			},
 		}
 	}
 }
