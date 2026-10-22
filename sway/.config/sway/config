@@ -271,9 +271,9 @@ for_window [app_id=.*] inhibit_idle fullscreen
 # Single rule for all those file/folder open popups
 for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable, resize set width 1030 height 710
 
-# swayimg opens floating; it resizes the window to the image's aspect ratio itself
-# (see swayimg/.config/swayimg/init.lua, capped at 1280x800)
-for_window [app_id="swayimg"] floating enable
+# swayimg opens floating and centered; it resizes the window to the image's aspect
+# ratio itself (see swayimg/.config/swayimg/init.lua, capped at 1280x800)
+for_window [app_id="swayimg"] floating enable, move position center
 
 # Include global configs
 include /etc/sway/config.d/*

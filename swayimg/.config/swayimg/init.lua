@@ -29,4 +29,8 @@ swayimg.on_initialized(function()
 		math.floor(img.width * s + 0.5),
 		math.floor(img.height * s + 0.5)
 	)
+	-- re-center once the compositor has applied the new size
+	swayimg.defer(0.1, function()
+		os.execute([[swaymsg '[app_id="swayimg"] move position center']])
+	end)
 end)
