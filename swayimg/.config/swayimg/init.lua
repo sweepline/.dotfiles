@@ -1,6 +1,10 @@
 -- swayimg configuration (Lua script, v5.x)
 -- See /usr/share/doc/swayimg/CONFIG.md and /usr/share/swayimg/example.lua
 
+-- Use sway's own window decorations (pixel border) instead of client-side
+-- decorations, so swayimg looks like every other window.
+swayimg.decoration = false
+
 -- Scale mode for newly opened images.
 -- "optimal" = 100% for small images, scaled down to fit the window for big ones.
 -- Aspect ratio is always preserved in every mode except "fill" (which crops).
